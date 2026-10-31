@@ -201,6 +201,15 @@ const playbooks = {
     type: "Content",
     title: "Content Series",
     text: "A repeatable content format that makes a brand recognisable and gives people a reason to come back.",
+    work: [
+      {
+        type: "Web App · HTML, CSS, JavaScript",
+        title: "Happy Birthday Mittar",
+        desc: "A birthday wish maker in Bangla and English. Pick a theme, add a photo and music, then download a card or record a short animation video and share it on WhatsApp or Facebook.",
+        url: "https://sandip617.github.io/happy-birthday-mittar/",
+        code: "https://github.com/sandip617/happy-birthday-mittar"
+      }
+    ],
     steps: [
       ["Content pillars", "Three or four themes the brand can own."],
       ["Format design", "Templates, tone of voice and a look people recognise."],
@@ -216,6 +225,52 @@ const modalType = document.getElementById("modalType");
 const modalTitle = document.getElementById("modalTitle");
 const modalText = document.getElementById("modalText");
 const modalSteps = document.getElementById("modalSteps");
+const modalWork = document.getElementById("modalWork");
+
+/* Builds the "Live project" cards shown inside a playbook */
+function renderWork(list) {
+  if (!modalWork) return;
+  modalWork.hidden = !list || !list.length;
+  if (modalWork.hidden) { modalWork.replaceChildren(); return; }
+  const label = document.createElement("p");
+  label.className = "eyebrow";
+  label.textContent = "Live project";
+  const cards = list.map(w => {
+    const card = document.createElement("div");
+    card.className = "work-item";
+    const thumb = document.createElement("a");
+    thumb.className = "work-thumb";
+    thumb.href = w.url; thumb.target = "_blank"; thumb.rel = "noopener";
+    thumb.setAttribute("aria-label", `Open ${w.title} live demo`);
+    thumb.innerHTML = '<i class="wb wb1"></i><i class="wb wb2"></i><i class="wb wb3"></i><span lang="bn">শুভ জন্মদিন!</span>';
+    const type = document.createElement("p");
+    type.className = "project-type";
+    type.textContent = w.type;
+    const h = document.createElement("h3");
+    h.textContent = w.title;
+    const d = document.createElement("p");
+    d.className = "work-desc";
+    d.textContent = w.desc;
+    const actions = document.createElement("div");
+    actions.className = "work-actions";
+    const live = document.createElement("a");
+    live.className = "btn btn-primary"; live.href = w.url; live.target = "_blank"; live.rel = "noopener";
+    live.textContent = "Live demo ↗";
+    actions.append(live);
+    if (w.code) {
+      const code = document.createElement("a");
+      code.className = "project-open"; code.href = w.code; code.target = "_blank"; code.rel = "noopener";
+      code.textContent = "View code";
+      actions.append(code);
+    }
+    const info = document.createElement("div");
+    info.className = "work-info";
+    info.append(type, h, d, actions);
+    card.append(thumb, info);
+    return card;
+  });
+  modalWork.replaceChildren(label, ...cards);
+}
 const modalClose = document.getElementById("modalClose");
 let lastFocus = null;
 
@@ -225,6 +280,7 @@ function openModal(key) {
   modalType.textContent = `Playbook · ${p.type}`;
   modalTitle.textContent = p.title;
   modalText.textContent = p.text;
+  renderWork(p.work);
   modalSteps.replaceChildren(...p.steps.map(([title, desc]) => {
     const li = document.createElement("li");
     const wrap = document.createElement("div");
