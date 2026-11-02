@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J8QLRPFXB0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-J8QLRPFXB0');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NN Tab — Download & Install · Sandip Pal</title>
+  <meta name="description"
+    content="NN Tab is a minimalist dark new tab page for Safari and Chrome by Sandip Pal. Download it free and follow the step-by-step install guide with screenshots.">
+  <meta name="author" content="Sandip Pal">
+  <meta name="theme-color" content="#f5f2ec">
+  <link rel="canonical" href="https://itzsandippal.com/projects/nn-tab/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sandip Pal">
+  <meta property="og:title" content="NN Tab — a minimalist new tab for Safari & Chrome">
+  <meta property="og:description" content="Clock, quotes, notes and a bookmarks grid. Free download and install guide.">
+  <meta property="og:image" content="https://itzsandippal.com/projects/nn-tab/01-new-tab.jpg">
+  <meta property="og:url" content="https://itzsandippal.com/projects/nn-tab/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://itzsandippal.com/projects/nn-tab/01-new-tab.jpg">
+
+  <link rel="icon" type="image/svg+xml" href="../../logo.svg">
+  <link rel="icon" type="image/png" href="../../logo.png">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .nt-back { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: .9rem; white-space: nowrap; transition: background .25s, color .25s; }
+    .nt-back:hover { background: var(--ink); color: var(--paper); }
+
+    .nt-hero { padding: 56px 0 40px; display: grid; gap: 40px; align-items: center; }
+    .nt-hero h1 { font-size: clamp(2.8rem, 7vw, 5rem); line-height: .95; letter-spacing: -.05em; margin-bottom: 18px; }
+    .nt-hero h1 em { color: var(--blue); }
+    .nt-hero .lead { color: var(--muted); font-size: 1.08rem; max-width: 520px; margin-bottom: 26px; }
+    .nt-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .nt-meta { margin-top: 16px; font-size: .88rem; color: var(--muted); }
+    .nt-shot { display: block; border-radius: 18px; overflow: hidden; background: #000; border: 1px solid var(--line); box-shadow: 0 30px 60px -30px rgba(17, 16, 20, .45); }
+    .nt-shot img { width: 100%; height: auto; }
+
+    .nt-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    .nt-jump a { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: .88rem; }
+    .nt-jump a:hover { background: var(--ink); color: var(--paper); }
+
+    .nt-section { padding: 56px 0; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
+    .nt-section h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); letter-spacing: -.04em; line-height: 1.05; margin-bottom: 12px; }
+    .nt-section h2 em { color: var(--blue); }
+    .nt-section > .container > p.sub { color: var(--muted); max-width: 640px; margin-bottom: 28px; }
+    .nt-section .modal-steps { max-width: 780px; margin-bottom: 0; }
+    .nt-section .modal-steps li { font-size: .97rem; padding: 14px; }
+    .nt-section .modal-steps li { grid-template-columns: 34px minmax(0, 1fr); }
+    .nt-section .modal-steps li > div, .nt-hero > *, .nt-help > div { min-width: 0; }
+
+    .cmd { display: flex; gap: 8px; align-items: stretch; margin-top: 10px; }
+    .cmd code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; padding: 10px 12px; border-radius: 10px; background: var(--ink); color: var(--paper); font: .82rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .copy-btn { flex: none; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: .82rem; font-weight: 700; cursor: pointer; }
+    .copy-btn:hover { background: var(--ink); color: var(--paper); }
+
+    .nt-help { display: grid; gap: 12px; max-width: 780px; }
+    .nt-help div { padding: 16px 18px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+    .nt-help strong { display: block; margin-bottom: 4px; }
+    .nt-help p { color: var(--muted); font-size: .95rem; }
+
+    .nt-usage { display: grid; gap: 22px; }
+    .nt-use { margin: 0; padding: 18px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); display: grid; gap: 16px; align-content: start; }
+    .nt-use figcaption strong { display: block; font-size: 1.15rem; letter-spacing: -.02em; margin-bottom: 4px; }
+    .nt-use figcaption span { color: var(--muted); font-size: .95rem; }
+    .nt-use .nt-shot { box-shadow: none; }
+    .nt-use-narrow .nt-shot { max-width: 340px; }
+
+    .nt-foot { padding: 34px 0 60px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; color: var(--muted); font-size: .9rem; }
+    .nt-foot a { font-weight: 700; color: var(--ink); }
+    .nt-foot a:hover { color: var(--blue); }
+
+    @media (min-width: 900px) {
+      .nt-hero { grid-template-columns: 5fr 7fr; padding: 72px 0 56px; }
+      .nt-usage { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nt-hero { padding: 32px 0 32px; }
+      .nt-section { padding: 44px 0; }
+      .btn { padding: 13px 22px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header" id="top">
+    <nav class="nav container">
+      <a class="brand" href="../../" aria-label="Sandip Pal home">
+        <img class="brand-mark" src="../../logo.svg" alt="" width="40" height="40">
+        <span class="brand-name">Sandip Pal</span>
+      </a>
+      <a class="nt-back" href="../../#series">← Back to Content Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="container nt-hero">
+      <div>
+        <p class="eyebrow">Browser extension · Safari &amp; Chrome</p>
+        <h1>NN <em>Tab</em></h1>
+        <p class="lead">A minimalist dark new tab page. Live clock, your own quote, a notes list and a bookmarks grid
+          with categories, drag-and-drop and auto-fetched icons. Plain HTML, CSS and JavaScript, so it opens
+          instantly. Free.</p>
+        <div class="nt-actions">
+          <a class="btn btn-primary" href="https://github.com/sandip617/Safari-New_Tab_Extension/archive/refs/heads/main.zip">Download ZIP ↓</a>
+          <a class="btn btn-ghost" href="https://github.com/sandip617/Safari-New_Tab_Extension" target="_blank" rel="noopener">View code ↗</a>
+        </div>
+        <p class="nt-meta">Your data stays on your device. No account, no tracking.</p>
+      </div>
+      <a class="nt-shot" href="01-new-tab.jpg" target="_blank" rel="noopener">
+        <img src="01-new-tab.jpg" width="1600" height="1000"
+          alt="NN Tab open in a new tab: clock, quote and notes on the left, bookmarks grid on the right">
+      </a>
+    </section>
+
+    <div class="container nt-jump" aria-label="On this page">
+      <a href="#safari">Install on Safari</a>
+      <a href="#chrome">Install on Chrome</a>
+      <a href="#use">How to use it</a>
+      <a href="#help">Help</a>
+    </div>
+
+    <section class="nt-section" id="safari">
+      <div class="container">
+        <p class="eyebrow">Mac · about 15 minutes</p>
+        <h2>Install on <em>Safari</em></h2>
+        <p class="sub">Safari extensions live inside a small Mac app, so you build it once on your own Mac with Xcode
+          (free). Most of the time is waiting for Xcode to download.</p>
+        <ol class="modal-steps">
+          <li><div><strong>Download NN Tab</strong><span>Click “Download ZIP” at the top of this page. Double-click the file in Downloads to unzip it. You get a folder called Safari-New_Tab_Extension-main.</span></div></li>
+          <li><div><strong>Install Xcode</strong><span>Get Xcode free from the Mac App Store. Open it once and let it finish installing its extra parts.</span></div></li>
+          <li><div><strong>Sign in to Xcode</strong><span>Xcode → Settings → Accounts → + → Apple ID. A free Apple ID is enough. Select your team, click Manage Certificates, then + → Apple Development.</span></div></li>
+          <li><div><strong>Find your Team ID</strong><span>Open Terminal (Cmd + Space, type Terminal) and paste this. Copy the 10-character code after OU=.</span>
+            <div class="cmd"><code>security find-certificate -c "Apple Development" -p | openssl x509 -noout -subject</code></div></div></li>
+          <li><div><strong>Build the app</strong><span>Paste this in Terminal, replacing YOURTEAMID with your code. Wait for “✓ Built”.</span>
+            <div class="cmd"><code>cd ~/Downloads/Safari-New_Tab_Extension-main &amp;&amp; TEAM_ID=YOURTEAMID zsh scripts/build-safari.sh</code></div></div></li>
+          <li><div><strong>Open NN Tab once</strong><span>This moves the app to Applications and opens it. You can close it after it opens.</span>
+            <div class="cmd"><code>cp -R "safari-app/build/Build/Products/Release/NN Tab.app" /Applications/ &amp;&amp; open "/Applications/NN Tab.app"</code></div></div></li>
+          <li><div><strong>Turn it on in Safari</strong><span>Safari → Settings → Extensions → tick NN Tab.</span></div></li>
+          <li><div><strong>Make it your new tab</strong><span>Safari → Settings → General → set “New windows open with” and “New tabs open with” to NN Tab.</span></div></li>
+          <li><div><strong>Allow bookmark icons</strong><span>Click the NN Tab button in the Safari toolbar → Allow on all websites. NN Tab needs this to fetch website icons.</span></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="nt-section" id="chrome">
+      <div class="container">
+        <p class="eyebrow">Any computer · 2 minutes</p>
+        <h2>Install on <em>Chrome</em></h2>
+        <p class="sub">No Xcode needed. Works on Mac, Windows and Linux.</p>
+        <ol class="modal-steps">
+          <li><div><strong>Download and unzip</strong><span>Click “Download ZIP” at the top of this page and unzip it.</span></div></li>
+          <li><div><strong>Open the extensions page</strong><span>Type this in Chrome’s address bar and press Enter.</span>
+            <div class="cmd"><code>chrome://extensions</code></div></div></li>
+          <li><div><strong>Turn on Developer mode</strong><span>Use the switch in the top-right corner.</span></div></li>
+          <li><div><strong>Load NN Tab</strong><span>Click “Load unpacked” and pick the unzipped Safari-New_Tab_Extension-main folder. Open a new tab and NN Tab is there.</span></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="nt-section" id="use">
+      <div class="container">
+        <p class="eyebrow">Everyday use</p>
+        <h2>How to <em>use it</em></h2>
+        <p class="sub">Everything saves by itself on your device.</p>
+        <div class="nt-usage">
+          <figure class="nt-use">
+            <figcaption><strong>Bookmarks and categories</strong><span>Click an icon to open the site. Use the tabs at the top (All, Bookmarks, Work, Social) to filter. Click + next to the tabs to add your own category, and right-click a tab to rename or delete it. Drag icons to reorder them.</span></figcaption>
+            <a class="nt-shot" href="01-new-tab.jpg" target="_blank" rel="noopener"><img src="01-new-tab.jpg" width="1600" height="1000" loading="lazy" alt="NN Tab home screen with category tabs and bookmark icons"></a>
+          </figure>
+          <figure class="nt-use">
+            <figcaption><strong>Add a bookmark</strong><span>Click “Add Bookmark” at the end of the grid. Type a name and the website address; the icon appears by itself. Not happy with it? Click “Next Icon”. Pick a category and click Save. Right-click any bookmark later to edit it.</span></figcaption>
+            <a class="nt-shot" href="02-add-bookmark.jpg" target="_blank" rel="noopener"><img src="02-add-bookmark.jpg" width="1100" height="733" loading="lazy" alt="Add Bookmark window with name, URL, category and a fetched Spotify icon"></a>
+          </figure>
+          <figure class="nt-use">
+            <figcaption><strong>Notes and your own quote</strong><span>Click “Add Note” to write a to-do, double-click a note to edit it, and tick it when done. Double-click the quote card to put in your own quote and author.</span></figcaption>
+            <a class="nt-shot" href="03-edit-quote.jpg" target="_blank" rel="noopener"><img src="03-edit-quote.jpg" width="1100" height="570" loading="lazy" alt="Edit Quote window with quote text and author fields"></a>
+          </figure>
+          <figure class="nt-use nt-use-narrow">
+            <figcaption><strong>Settings and backup</strong><span>Click the NN Tab button in the Safari toolbar to open Settings. Switch to light mode, set your own wallpaper, and use Export to save a backup file. Import brings it back on a new Mac.</span></figcaption>
+            <a class="nt-shot" href="04-settings.jpg" target="_blank" rel="noopener"><img src="04-settings.jpg" width="620" height="620" loading="lazy" alt="NN Tab Settings page with light mode toggle, wallpaper and backup buttons"></a>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="nt-section" id="help">
+      <div class="container">
+        <p class="eyebrow">Stuck?</p>
+        <h2>If something <em>goes wrong</em></h2>
+        <div class="nt-help">
+          <div><strong>NN Tab is missing in Safari Extensions</strong><p>Safari → Settings → Advanced → tick “Show features for web developers”. Then Develop menu → Allow Unsigned Extensions, and check Extensions again.</p></div>
+          <div><strong>“xcodebuild” error in Terminal</strong><p>Run this, enter your Mac password, then build again.</p><div class="cmd"><code>sudo xcode-select -s /Applications/Xcode.app</code></div></div>
+          <div><strong>Bookmark icons don’t show</strong><p>Click the NN Tab button in the Safari toolbar and choose Allow on all websites.</p></div>
+          <div><strong>Still stuck?</strong><p>Message me on <a href="https://wa.me/917022232721" target="_blank" rel="noopener"><strong style="display:inline">WhatsApp</strong></a> or open an issue on <a href="https://github.com/sandip617/Safari-New_Tab_Extension/issues" target="_blank" rel="noopener"><strong style="display:inline">GitHub</strong></a>.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="container nt-foot">
+      <p>© <span id="year">2026</span> Sandip Pal · NN Tab is free and open source (MIT)</p>
+      <a href="../../#series">← Back to Content Series</a>
+    </footer>
+  </main>
+
+  <script>
+    // Copy buttons for the Terminal commands
+    document.querySelectorAll(".cmd").forEach(box => {
+      const btn = document.createElement("button");
+      btn.type = "button"; btn.className = "copy-btn"; btn.textContent = "Copy";
+      btn.addEventListener("click", async () => {
+        try { await navigator.clipboard.writeText(box.querySelector("code").textContent); btn.textContent = "Copied ✓"; }
+        catch { btn.textContent = "Select & copy"; }
+        setTimeout(() => { btn.textContent = "Copy"; }, 1800);
+      });
+      box.append(btn);
+    });
+    document.getElementById("year").textContent = new Date().getFullYear();
+    // Header border once the page is scrolled
+    const header = document.querySelector(".site-header");
+    addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 8), { passive: true });
+  </script>
+</body>
+
+</html>

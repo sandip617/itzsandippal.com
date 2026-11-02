@@ -664,32 +664,6 @@ h2 em { letter-spacing: -.02em; color: var(--blue); }
 .work-thumb-newtab .nt-clock { font-family: var(--sans); font-size: 2.6rem; font-weight: 300; letter-spacing: -.03em; color: #fff; text-shadow: none; }
 .work-thumb-newtab .nt-tiles { display: flex; gap: 8px; }
 .work-thumb-newtab .nt-tiles i { width: 26px; height: 26px; border-radius: 8px; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .16); }
-/* install guide inside a project card */
-button.work-thumb { width: 100%; border: 0; cursor: pointer; font: inherit; }
-.work-title-btn { all: unset; cursor: pointer; border-bottom: 2px solid var(--blue); }
-.work-title-btn:hover, .work-title-btn:focus-visible { color: var(--blue); }
-.install-guide { margin-top: 14px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 14px; }
-.install-head { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
-.install-need { color: var(--muted); font-size: .85rem; }
-.install-steps { margin-bottom: 0; }
-.install-steps li { min-width: 0; }
-.install-steps li > div { min-width: 0; }
-.cmd { display: flex; gap: 8px; align-items: stretch; margin-top: 8px; }
-.cmd code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; padding: 9px 11px; border-radius: 10px; background: var(--ink); color: var(--paper); font: .8rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
-.copy-btn { flex: none; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font: inherit; font-size: .8rem; font-weight: 700; cursor: pointer; }
-.copy-btn:hover { background: var(--ink); color: var(--paper); }
-.install-help { display: grid; gap: 8px; font-size: .88rem; color: var(--muted); }
-.install-help strong { color: var(--ink); }
-/* screenshots inside the install guide */
-.guide-shot { display: block; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #000; }
-.guide-shot img { width: 100%; height: auto; transition: transform .3s; }
-.guide-preview img { aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
-.guide-shot:hover img { transform: scale(1.02); }
-.guide-usage { display: grid; gap: 16px; }
-.usage-item { display: grid; gap: 10px; margin: 0; }
-.usage-item figcaption { display: grid; gap: 4px; font-size: .9rem; color: var(--muted); }
-.usage-item figcaption strong { color: var(--ink); font-size: 1rem; }
-.usage-item:last-child .guide-shot { max-width: 320px; }
 .work-info { padding: 18px 20px 20px; display: grid; gap: 8px; }
 .work-info h3 { font-size: 1.3rem; letter-spacing: -.02em; line-height: 1.2; }
 .work-desc { color: var(--muted); font-size: .93rem; }
