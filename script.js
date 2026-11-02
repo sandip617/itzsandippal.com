@@ -207,7 +207,17 @@ const playbooks = {
         title: "Happy Birthday Mittar",
         desc: "A birthday wish maker in Bangla and English. Pick a theme, add a photo and music, then download a card or record a short animation video and share it on WhatsApp or Facebook.",
         url: "https://sandip617.github.io/happy-birthday-mittar/",
-        code: "https://github.com/sandip617/happy-birthday-mittar"
+        code: "https://github.com/sandip617/happy-birthday-mittar",
+        thumb: "birthday"
+      },
+      {
+        type: "Browser Extension · Safari & Chrome",
+        title: "NN Tab",
+        desc: "A minimalist dark new tab page for Safari and Chrome. Live clock, editable quotes, a notes list and a bookmarks grid with categories, drag-and-drop and auto-fetched icons. Plain HTML, CSS and JavaScript, so it opens instantly.",
+        code: "https://github.com/sandip617/Safari-New_Tab_Extension",
+        download: "https://github.com/sandip617/Safari-New_Tab_Extension/archive/refs/heads/main.zip",
+        thumb: "newtab",
+        guide: "safari"
       }
     ],
     steps: [
@@ -227,6 +237,142 @@ const modalText = document.getElementById("modalText");
 const modalSteps = document.getElementById("modalSteps");
 const modalWork = document.getElementById("modalWork");
 
+/* Artwork for each live project's thumbnail */
+const workThumbs = {
+  birthday: '<i class="wb wb1"></i><i class="wb wb2"></i><i class="wb wb3"></i><span lang="bn">শুভ জন্মদিন!</span>',
+  newtab: '<img class="nt-logo" src="projects/nn-tab/logo.png" alt="" width="40" height="40">' +
+    '<span class="nt-clock">09:41</span>' +
+    '<span class="nt-tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>'
+};
+
+/* Step-by-step install guides. Each step: [title, text, optional Terminal command] */
+const installGuides = {
+  safari: {
+    intro: "Safari extensions live inside a small Mac app, so you build it once on your own Mac with Xcode (free). It takes about 15 minutes, most of it waiting for Xcode to download.",
+    steps: [
+      ["Download NN Tab", "Click “Download ZIP” above. Double-click the file in Downloads to unzip it. You get a folder called Safari-New_Tab_Extension-main."],
+      ["Install Xcode", "Get Xcode free from the Mac App Store. Open it once and let it finish installing its extra parts."],
+      ["Sign in to Xcode", "Xcode → Settings → Accounts → + → Apple ID. A free Apple ID is enough. Select your team, click Manage Certificates, then + → Apple Development."],
+      ["Find your Team ID", "Open Terminal (Cmd + Space, type Terminal) and paste this. Copy the 10-character code after OU=.", 'security find-certificate -c "Apple Development" -p | openssl x509 -noout -subject'],
+      ["Build the app", "Paste this in Terminal, replacing YOURTEAMID with your code. Wait for “✓ Built”.", 'cd ~/Downloads/Safari-New_Tab_Extension-main && TEAM_ID=YOURTEAMID zsh scripts/build-safari.sh'],
+      ["Open NN Tab once", "This moves the app to Applications and opens it. You can close it after it opens.", 'cp -R "safari-app/build/Build/Products/Release/NN Tab.app" /Applications/ && open "/Applications/NN Tab.app"'],
+      ["Turn it on in Safari", "Safari → Settings → Extensions → tick NN Tab."],
+      ["Make it your new tab", "Safari → Settings → General → set “New windows open with” and “New tabs open with” to NN Tab."],
+      ["Allow bookmark icons", "Click the NN Tab button in the Safari toolbar → Allow on all websites. NN Tab needs this to fetch website icons."]
+    ],
+    help: [
+      ["NN Tab is missing in Extensions?", "Safari → Settings → Advanced → tick “Show features for web developers”. Then Develop menu → Allow Unsigned Extensions, and check Extensions again."],
+      ["“xcodebuild” error in Terminal?", "Run this, enter your Mac password, then build again: sudo xcode-select -s /Applications/Xcode.app"],
+      ["Using Chrome instead?", "No Xcode needed. Unzip, open chrome://extensions, turn on Developer mode, click Load unpacked and pick the unzipped folder."]
+    ],
+    // Screenshot shown at the top of the guide
+    preview: ["projects/nn-tab/01-new-tab.jpg", "NN Tab open in a new tab: clock, quote and notes on the left, bookmarks grid on the right"],
+    // Everyday use: [image or null, alt text, title, text]
+    usage: [
+      [null, null, // same view as the screenshot at the top
+        "Bookmarks and categories", "Click an icon to open the site. Use the tabs at the top (All, Bookmarks, Work, Social) to filter. Click + next to the tabs to add your own category, and right-click a tab to rename or delete it. Drag icons to reorder them."],
+      ["projects/nn-tab/02-add-bookmark.jpg", "Add Bookmark window with name, URL, category and a fetched Spotify icon",
+        "Add a bookmark", "Click “Add Bookmark” at the end of the grid. Type a name and the website address; the icon appears by itself. Not happy with it? Click “Next Icon”. Pick a category and click Save. Right-click any bookmark later to edit it."],
+      ["projects/nn-tab/03-edit-quote.jpg", "Edit Quote window with quote text and author fields",
+        "Notes and your own quote", "Click “Add Note” to write a to-do, double-click a note to edit it, and tick it when done. Double-click the quote card to put in your own quote and author."],
+      ["projects/nn-tab/04-settings.jpg", "NN Tab Settings page with light mode toggle, wallpaper and backup buttons",
+        "Settings and backup", "Click the NN Tab button in the Safari toolbar to open Settings. Switch to light mode, set your own wallpaper, and use Export to save a backup file (Import brings it back on a new Mac)."]
+    ]
+  }
+};
+
+/* A screenshot that opens full size in a new tab when clicked */
+function shot(src, alt) {
+  const a = document.createElement("a");
+  a.className = "guide-shot"; a.href = src; a.target = "_blank"; a.rel = "noopener";
+  const img = document.createElement("img");
+  img.src = src; img.alt = alt; img.loading = "lazy"; img.decoding = "async";
+  a.append(img);
+  return a;
+}
+
+function copyButton(text) {
+  const btn = document.createElement("button");
+  btn.type = "button"; btn.className = "copy-btn"; btn.textContent = "Copy";
+  btn.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(text); btn.textContent = "Copied ✓"; }
+    catch { btn.textContent = "Select & copy"; }
+    setTimeout(() => { btn.textContent = "Copy"; }, 1800);
+  });
+  return btn;
+}
+
+/* The download + install panel that opens under a project card */
+function buildGuide(w, id) {
+  const g = installGuides[w.guide];
+  const panel = document.createElement("div");
+  panel.className = "install-guide"; panel.id = id; panel.hidden = true;
+
+  const head = document.createElement("div");
+  head.className = "install-head";
+  const dl = document.createElement("a");
+  dl.className = "btn btn-primary"; dl.href = w.download; dl.setAttribute("download", "");
+  dl.textContent = "Download ZIP ↓";
+  const need = document.createElement("p");
+  need.className = "install-need";
+  need.textContent = "Needs a Mac and Xcode (free)";
+  head.append(dl, need);
+
+  const intro = document.createElement("p");
+  intro.className = "work-desc"; intro.textContent = g.intro;
+
+  const ol = document.createElement("ol");
+  ol.className = "modal-steps install-steps";
+  g.steps.forEach(([title, text, cmd]) => {
+    const li = document.createElement("li");
+    const wrap = document.createElement("div");
+    const strong = document.createElement("strong"); strong.textContent = title;
+    const span = document.createElement("span"); span.textContent = text;
+    wrap.append(strong, span);
+    if (cmd) {
+      const box = document.createElement("div"); box.className = "cmd";
+      const code = document.createElement("code"); code.textContent = cmd;
+      box.append(code, copyButton(cmd));
+      wrap.append(box);
+    }
+    li.append(wrap);
+    ol.append(li);
+  });
+
+  const help = document.createElement("div");
+  help.className = "install-help";
+  const hl = document.createElement("p"); hl.className = "eyebrow"; hl.textContent = "If something goes wrong";
+  help.append(hl, ...g.help.map(([q, a]) => {
+    const p = document.createElement("p");
+    const b = document.createElement("strong"); b.textContent = q + " ";
+    p.append(b, a);
+    return p;
+  }));
+
+  const preview = g.preview ? shot(...g.preview) : null;
+  if (preview) preview.classList.add("guide-preview");
+
+  const how = document.createElement("div");
+  if (g.usage) {
+    how.className = "guide-usage";
+    const ul = document.createElement("p"); ul.className = "eyebrow"; ul.textContent = "How to use it";
+    how.append(ul, ...g.usage.map(([src, alt, title, text]) => {
+      const fig = document.createElement("figure");
+      fig.className = "usage-item";
+      const cap = document.createElement("figcaption");
+      const strong = document.createElement("strong"); strong.textContent = title;
+      const span = document.createElement("span"); span.textContent = text;
+      cap.append(strong, span);
+      fig.append(cap);
+      if (src) fig.append(shot(src, alt));
+      return fig;
+    }));
+  }
+
+  panel.append(head, ...(preview ? [preview] : []), intro, ol, help, ...(g.usage ? [how] : []));
+  return panel;
+}
+
 /* Builds the "Live project" cards shown inside a playbook */
 function renderWork(list) {
   if (!modalWork) return;
@@ -234,30 +380,65 @@ function renderWork(list) {
   if (modalWork.hidden) { modalWork.replaceChildren(); return; }
   const label = document.createElement("p");
   label.className = "eyebrow";
-  label.textContent = "Live project";
-  const cards = list.map(w => {
+  label.textContent = list.length > 1 ? "Live projects" : "Live project";
+  const cards = list.map((w, i) => {
     const card = document.createElement("div");
     card.className = "work-item";
-    const thumb = document.createElement("a");
+    const link = w.url || w.code;
+    const guideId = `install-guide-${i}`;
+    // Projects with an install guide open it on click instead of leaving the page
+    const thumb = document.createElement(w.guide ? "button" : "a");
     thumb.className = "work-thumb";
-    thumb.href = w.url; thumb.target = "_blank"; thumb.rel = "noopener";
-    thumb.setAttribute("aria-label", `Open ${w.title} live demo`);
-    thumb.innerHTML = '<i class="wb wb1"></i><i class="wb wb2"></i><i class="wb wb3"></i><span lang="bn">শুভ জন্মদিন!</span>';
+    if (w.guide) {
+      thumb.type = "button";
+      thumb.setAttribute("aria-label", `Download and install ${w.title}`);
+    } else {
+      thumb.href = link; thumb.target = "_blank"; thumb.rel = "noopener";
+      thumb.setAttribute("aria-label", w.url ? `Open ${w.title} live demo` : `Open ${w.title} on GitHub`);
+    }
+    thumb.innerHTML = workThumbs[w.thumb] || "";
+    if (w.thumb) thumb.classList.add(`work-thumb-${w.thumb}`);
     const type = document.createElement("p");
     type.className = "project-type";
     type.textContent = w.type;
     const h = document.createElement("h3");
-    h.textContent = w.title;
+    if (w.guide) {
+      const tb = document.createElement("button");
+      tb.type = "button"; tb.className = "work-title-btn"; tb.textContent = w.title;
+      h.append(tb);
+    } else {
+      h.textContent = w.title;
+    }
     const d = document.createElement("p");
     d.className = "work-desc";
     d.textContent = w.desc;
     const actions = document.createElement("div");
     actions.className = "work-actions";
-    const live = document.createElement("a");
-    live.className = "btn btn-primary"; live.href = w.url; live.target = "_blank"; live.rel = "noopener";
-    live.textContent = "Live demo ↗";
-    actions.append(live);
-    if (w.code) {
+    let guide = null;
+    if (w.guide) {
+      guide = buildGuide(w, guideId);
+      const toggle = document.createElement("button");
+      toggle.type = "button"; toggle.className = "btn btn-primary";
+      toggle.setAttribute("aria-controls", guideId);
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.textContent = "Download & install ↓";
+      const setOpen = open => {
+        guide.hidden = !open;
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.textContent = open ? "Hide install steps ↑" : "Download & install ↓";
+        if (open) guide.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      };
+      toggle.addEventListener("click", () => setOpen(guide.hidden));
+      // Clicking the picture or the name also opens the steps
+      [thumb, h.firstChild].forEach(el => el.addEventListener("click", () => setOpen(true)));
+      actions.append(toggle);
+    } else {
+      const live = document.createElement("a");
+      live.className = "btn btn-primary"; live.href = link; live.target = "_blank"; live.rel = "noopener";
+      live.textContent = w.url ? "Live demo ↗" : "View on GitHub ↗";
+      actions.append(live);
+    }
+    if (w.code && (w.url || w.guide)) {
       const code = document.createElement("a");
       code.className = "project-open"; code.href = w.code; code.target = "_blank"; code.rel = "noopener";
       code.textContent = "View code";
@@ -266,6 +447,7 @@ function renderWork(list) {
     const info = document.createElement("div");
     info.className = "work-info";
     info.append(type, h, d, actions);
+    if (guide) info.append(guide);
     card.append(thumb, info);
     return card;
   });
