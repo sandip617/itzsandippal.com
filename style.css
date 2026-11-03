@@ -664,6 +664,14 @@ h2 em { letter-spacing: -.02em; color: var(--blue); }
 .work-thumb-newtab .nt-clock { font-family: var(--sans); font-size: 2.6rem; font-weight: 300; letter-spacing: -.03em; color: #fff; text-shadow: none; }
 .work-thumb-newtab .nt-tiles { display: flex; gap: 8px; }
 .work-thumb-newtab .nt-tiles i { width: 26px; height: 26px; border-radius: 8px; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .16); }
+/* News Board thumbnail: a newspaper front page */
+.work-thumb-news { background: #f5f1e8; align-content: center; gap: 6px; padding: 0 22px; }
+.work-thumb-news span { text-shadow: none; color: #1b1814; }
+.work-thumb-news .nb-date { font-family: var(--sans); font-size: .62rem; font-weight: 800; letter-spacing: .16em; color: #b0241c; }
+.work-thumb-news .nb-mast { font-family: var(--serif); font-weight: 400; font-size: 2.3rem; line-height: 1; padding-bottom: 6px; border-bottom: 3px double #1b1814; }
+.work-thumb-news .nb-cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; width: min(240px, 100%); }
+.work-thumb-news .nb-cols i { height: 22px; background: repeating-linear-gradient(#1b1814 0 2px, transparent 2px 6px); opacity: .22; }
+.work-thumb-news .nb-cols i:first-child { opacity: .4; }
 .work-info { padding: 18px 20px 20px; display: grid; gap: 8px; }
 .work-info h3 { font-size: 1.3rem; letter-spacing: -.02em; line-height: 1.2; }
 .work-desc { color: var(--muted); font-size: .93rem; }

@@ -217,6 +217,16 @@ const playbooks = {
         code: "https://github.com/sandip617/Safari-New_Tab_Extension",
         page: "projects/nn-tab/",
         thumb: "newtab"
+      },
+      {
+        type: "Daily Newspaper · Bangla & English",
+        title: "News Board",
+        desc: "A daily business newspaper for BBA students that updates itself every morning at 7 AM. Global news with a \"why it matters\" note, an AI-written blog, term of the day, GD topic, quiz, weekly case study and market snapshot. Free and open source, with a guide to run your own.",
+        url: "https://sandip617.github.io/news-board/",
+        code: "https://github.com/sandip617/news-board",
+        page: "projects/news-board/",
+        cta: "See how it works →",
+        thumb: "news"
       }
     ],
     steps: [
@@ -241,7 +251,9 @@ const workThumbs = {
   birthday: '<i class="wb wb1"></i><i class="wb wb2"></i><i class="wb wb3"></i><span lang="bn">শুভ জন্মদিন!</span>',
   newtab: '<img class="nt-logo" src="projects/nn-tab/logo.png" alt="" width="40" height="40">' +
     '<span class="nt-clock">09:41</span>' +
-    '<span class="nt-tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>'
+    '<span class="nt-tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>',
+  news: '<span class="nb-date">TUESDAY · 3 NOVEMBER</span><span class="nb-mast">News Board</span>' +
+    '<span class="nb-cols" aria-hidden="true"><i></i><i></i><i></i></span>'
 };
 
 /* Builds the "Live project" cards shown inside a playbook */
@@ -265,7 +277,7 @@ function renderWork(list) {
     const thumb = document.createElement("a");
     thumb.className = "work-thumb";
     setLink(thumb);
-    thumb.setAttribute("aria-label", w.page ? `Download and install ${w.title}` : w.url ? `Open ${w.title} live demo` : `Open ${w.title} on GitHub`);
+    thumb.setAttribute("aria-label", w.cta ? `${w.title}: ${w.cta.replace(/ [→↗]$/, "")}` : w.page ? `Download and install ${w.title}` : w.url ? `Open ${w.title} live demo` : `Open ${w.title} on GitHub`);
     thumb.innerHTML = workThumbs[w.thumb] || "";
     if (w.thumb) thumb.classList.add(`work-thumb-${w.thumb}`);
     const type = document.createElement("p");
@@ -281,8 +293,15 @@ function renderWork(list) {
     const main = document.createElement("a");
     main.className = "btn btn-primary";
     setLink(main);
-    main.textContent = w.page ? "Download & install →" : w.url ? "Live demo ↗" : "View on GitHub ↗";
+    main.textContent = w.cta || (w.page ? "Download & install →" : w.url ? "Live demo ↗" : "View on GitHub ↗");
     actions.append(main);
+    // A project with its own page can also link straight to its live demo
+    if (w.page && w.url) {
+      const demo = document.createElement("a");
+      demo.className = "project-open"; demo.href = w.url; demo.target = "_blank"; demo.rel = "noopener";
+      demo.textContent = "Live demo ↗";
+      actions.append(demo);
+    }
     if (w.code && link !== w.code) {
       const code = document.createElement("a");
       code.className = "project-open"; code.href = w.code; code.target = "_blank"; code.rel = "noopener";

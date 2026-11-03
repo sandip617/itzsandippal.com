@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J8QLRPFXB0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-J8QLRPFXB0');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News Board — Run Your Own · Sandip Pal</title>
+  <meta name="description"
+    content="News Board is a daily business newspaper for BBA students in Bangla and English that updates itself every morning. Free and open source, with a step-by-step guide to run your own.">
+  <meta name="author" content="Sandip Pal">
+  <meta name="theme-color" content="#f5f2ec">
+  <link rel="canonical" href="https://itzsandippal.com/projects/news-board/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sandip Pal">
+  <meta property="og:title" content="News Board — a daily business newspaper for BBA students">
+  <meta property="og:description" content="Global news, an AI blog, quiz and case study every morning, in Bangla and English. Free guide to run your own.">
+  <meta property="og:url" content="https://itzsandippal.com/projects/news-board/">
+
+  <link rel="icon" type="image/svg+xml" href="../../logo.svg">
+  <link rel="icon" type="image/png" href="../../logo.png">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=Tiro+Bangla&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .nt-back { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: .9rem; white-space: nowrap; transition: background .25s, color .25s; }
+    .nt-back:hover { background: var(--ink); color: var(--paper); }
+
+    .nt-hero { padding: 56px 0 40px; display: grid; gap: 40px; align-items: center; }
+    .nt-hero h1 { font-size: clamp(2.8rem, 7vw, 5rem); line-height: .95; letter-spacing: -.05em; margin-bottom: 18px; }
+    .nt-hero h1 em { color: var(--blue); }
+    .nt-hero .lead { color: var(--muted); font-size: 1.08rem; max-width: 520px; margin-bottom: 26px; }
+    .nt-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .nt-meta { margin-top: 16px; font-size: .88rem; color: var(--muted); }
+
+    /* A small front page, drawn in HTML so it stays sharp */
+    .paper { display: block; border-radius: 18px; overflow: hidden; background: #f5f1e8; color: #1b1814; border: 1px solid var(--line); box-shadow: 0 30px 60px -30px rgba(17, 16, 20, .45); padding: 18px 22px 22px; text-decoration: none; }
+    .paper-top { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: .7rem; font-weight: 700; color: #5a5247; padding-bottom: 6px; border-bottom: 1px solid #cbc1af; }
+    .paper-top b { color: #b0241c; }
+    .paper-top .pill { border: 1px solid #1b1814; border-radius: 2px; padding: 0 6px; color: #1b1814; }
+    .paper-mast { font-family: "Tiro Bangla", var(--serif); font-size: clamp(2rem, 5vw, 3.2rem); text-align: center; line-height: 1.1; padding: 10px 0 6px; border-bottom: 3px double #1b1814; }
+    .paper-mkt { display: flex; gap: 14px; overflow: hidden; font-size: .68rem; font-weight: 700; padding: 6px 0; border-bottom: 1px solid #cbc1af; white-space: nowrap; }
+    .paper-mkt .up { color: #22683b; } .paper-mkt .dn { color: #b0241c; }
+    .paper-body { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; padding-top: 12px; }
+    .paper-body > * { min-width: 0; }
+    .paper-k { font-size: .62rem; font-weight: 800; letter-spacing: .1em; color: #b0241c; text-transform: uppercase; }
+    .paper-h { font-family: "Tiro Bangla", var(--serif); font-size: 1.25rem; line-height: 1.2; margin: 4px 0 6px; }
+    .paper-lines { height: 46px; background: repeating-linear-gradient(#1b1814 0 1px, transparent 1px 7px); opacity: .25; }
+    .paper-why { margin-top: 8px; background: #ece6d9; border-left: 3px solid #b0241c; font-size: .66rem; padding: 5px 8px; line-height: 1.4; }
+    .paper-side { border-left: 1px solid #cbc1af; padding-left: 12px; }
+    .paper-term { font-family: "Tiro Bangla", var(--serif); font-size: 1.4rem; line-height: 1.1; margin-top: 2px; }
+
+    .nt-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    .nt-jump a { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: .88rem; }
+    .nt-jump a:hover { background: var(--ink); color: var(--paper); }
+
+    .nt-section { padding: 56px 0; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
+    .nt-section h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); letter-spacing: -.04em; line-height: 1.05; margin-bottom: 12px; }
+    .nt-section h2 em { color: var(--blue); }
+    .nt-section > .container > p.sub { color: var(--muted); max-width: 640px; margin-bottom: 28px; }
+    .nt-section .modal-steps { max-width: 780px; margin-bottom: 0; }
+    .nt-section .modal-steps li { font-size: .97rem; padding: 14px; }
+    .nt-section .modal-steps li { grid-template-columns: 34px minmax(0, 1fr); }
+    .nt-section .modal-steps li > div, .nt-hero > *, .nt-help > div { min-width: 0; }
+    .modal-steps li a { color: var(--blue); font-weight: 700; }
+
+    .cmd { display: flex; gap: 8px; align-items: stretch; margin-top: 10px; }
+    .cmd code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; padding: 10px 12px; border-radius: 10px; background: var(--ink); color: var(--paper); font: .82rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .cmd.block code { white-space: pre-wrap; overflow-wrap: anywhere; }
+    .copy-btn { flex: none; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: .82rem; font-weight: 700; cursor: pointer; }
+    .copy-btn:hover { background: var(--ink); color: var(--paper); }
+
+    .nb-features { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); max-width: 980px; }
+    .nb-features div { padding: 16px 18px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+    .nb-features strong { display: block; margin-bottom: 4px; }
+    .nb-features p { color: var(--muted); font-size: .93rem; }
+
+    .nb-choose { display: grid; gap: 14px; max-width: 980px; margin-bottom: 8px; }
+    .nb-choose a { display: block; padding: 18px 20px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); transition: border-color .25s, transform .25s; }
+    .nb-choose a:hover { border-color: var(--ink); transform: translateY(-3px); }
+    .nb-choose strong { display: block; font-size: 1.15rem; letter-spacing: -.02em; margin-bottom: 4px; }
+    .nb-choose span { color: var(--muted); font-size: .95rem; }
+    .nb-choose .tag { display: inline-block; margin-bottom: 8px; padding: 3px 10px; border-radius: 999px; background: var(--paper-2); color: var(--ink); font-size: .74rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+
+    .nb-table { width: 100%; max-width: 780px; border-collapse: collapse; font-size: .95rem; }
+    .nb-wrap { overflow-x: auto; }
+    .nb-table th, .nb-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .nb-table th { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .nb-table code { font: .82rem ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--paper-2); padding: 1px 6px; border-radius: 6px; }
+
+    .nt-help { display: grid; gap: 12px; max-width: 780px; }
+    .nt-help div { padding: 16px 18px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+    .nt-help strong { display: block; margin-bottom: 4px; }
+    .nt-help p { color: var(--muted); font-size: .95rem; }
+
+    .nt-foot { padding: 34px 0 60px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; color: var(--muted); font-size: .9rem; }
+    .nt-foot a { font-weight: 700; color: var(--ink); }
+    .nt-foot a:hover { color: var(--blue); }
+
+    @media (min-width: 900px) {
+      .nt-hero { grid-template-columns: 5fr 7fr; padding: 72px 0 56px; }
+      .nb-choose { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nt-hero { padding: 32px 0 32px; }
+      .nt-section { padding: 44px 0; }
+      .btn { padding: 13px 22px; }
+      .paper-body { grid-template-columns: 1fr; }
+      .paper-side { border-left: 0; padding-left: 0; border-top: 1px solid #cbc1af; padding-top: 8px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header" id="top">
+    <nav class="nav container">
+      <a class="brand" href="../../" aria-label="Sandip Pal home">
+        <img class="brand-mark" src="../../logo.svg" alt="" width="40" height="40">
+        <span class="brand-name">Sandip Pal</span>
+      </a>
+      <a class="nt-back" href="../../#series">← Back to Content Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="container nt-hero">
+      <div>
+        <p class="eyebrow">Daily newspaper · Bangla &amp; English</p>
+        <h1>News <em>Board</em></h1>
+        <p class="lead">A business newspaper for BBA students that writes itself every morning at 7 AM. The day's
+          most important global news, each with a note on why it matters for your studies, plus a blog, a quiz and a
+          weekly case study. One button switches everything between Bangla and English.</p>
+        <div class="nt-actions">
+          <a class="btn btn-primary" href="https://sandip617.github.io/news-board/" target="_blank" rel="noopener">Live demo ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/sandip617/news-board" target="_blank" rel="noopener">View code ↗</a>
+        </div>
+        <p class="nt-meta">Free and open source (MIT). Fork it and make it your own.</p>
+      </div>
+      <a class="paper" href="https://sandip617.github.io/news-board/" target="_blank" rel="noopener" aria-label="Open the News Board live demo">
+        <div class="paper-top"><span>Tuesday, 3 November 2026 · <b>New edition every day at 7 AM</b></span><span class="pill">বাংলা | English</span></div>
+        <div class="paper-mast">Sandip's Board</div>
+        <div class="paper-mkt"><span>Sensex 75,692 <i class="up">+1.66%</i></span><span>Nifty 23,440 <i class="up">+1.68%</i></span><span>S&amp;P 500 7,541 <i class="dn">−0.51%</i></span><span>Brent $104 <i class="dn">−8.1%</i></span></div>
+        <div class="paper-body">
+          <div>
+            <div class="paper-k">Lead story · M&amp;A</div>
+            <div class="paper-h">Marvell to buy Lumentum in a $115 billion deal</div>
+            <div class="paper-lines"></div>
+            <div class="paper-why"><b>For BBA students:</b> all-stock deals, acquisition premium and synergy in one story.</div>
+          </div>
+          <div class="paper-side">
+            <div class="paper-k">Term of the day</div>
+            <div class="paper-term">Synergy</div>
+            <div class="paper-lines" style="height:32px;margin-top:6px"></div>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <div class="container nt-jump" aria-label="On this page">
+      <a href="#inside">What's inside</a>
+      <a href="#free">Run it free</a>
+      <a href="#auto">Make it automatic</a>
+      <a href="#yours">Make it yours</a>
+      <a href="#help">Help</a>
+    </div>
+
+    <section class="nt-section" id="inside">
+      <div class="container">
+        <p class="eyebrow">Every edition</p>
+        <h2>What's <em>inside</em></h2>
+        <p class="sub">One page, built for a ten-minute morning read before class.</p>
+        <div class="nb-features">
+          <div><strong>Today's news</strong><p>7–8 global business stories. Each has a short summary, a “for BBA students” note and a link to the source.</p></div>
+          <div><strong>Market snapshot</strong><p>S&amp;P 500, Dow, Nasdaq, Sensex, Nifty 50, Brent crude, gold and the rupee.</p></div>
+          <div><strong>AI blog</strong><p>A 5-minute explainer on one business idea, tied to the day's news. Readers can suggest the next topic.</p></div>
+          <div><strong>Term of the day</strong><p>One business term with a definition, a real example, a formula and an interview tip.</p></div>
+          <div><strong>GD topic</strong><p>A group-discussion topic with three points for and three against.</p></div>
+          <div><strong>Quiz</strong><p>Five MCQs from the day's news, with instant answers and explanations.</p></div>
+          <div><strong>Case study of the week</strong><p>A real company strategy, new every Monday.</p></div>
+          <div><strong>Notebook and archive</strong><p>Save stories, write notes and read any past edition.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="nt-section" id="run">
+      <div class="container">
+        <p class="eyebrow">Run your own</p>
+        <h2>Pick <em>a way</em></h2>
+        <p class="sub">Both start from the same free code on GitHub.</p>
+        <div class="nb-choose">
+          <a href="#free"><span class="tag">Free · 5 minutes</span><strong>On GitHub Pages</strong><span>Your board goes online for free. You post new editions yourself by editing a file.</span></a>
+          <a href="#auto"><span class="tag">Automatic · 20 minutes</span><strong>With Claude</strong><span>A new edition appears every morning by itself. Needs a paid Claude plan (Pro or Max).</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="nt-section" id="free">
+      <div class="container">
+        <p class="eyebrow">Free · about 5 minutes</p>
+        <h2>Run it free on <em>GitHub Pages</em></h2>
+        <p class="sub">You only need a free GitHub account. The board won't update by itself, but you can post a new edition any time.</p>
+        <ol class="modal-steps">
+          <li><div><strong>Fork the code</strong><span>Open <a href="https://github.com/sandip617/news-board" target="_blank" rel="noopener">github.com/sandip617/news-board</a> and click Fork (top right), then Create fork. You now have your own copy.</span></div></li>
+          <li><div><strong>Turn on GitHub Pages</strong><span>In your fork, go to Settings → Pages. Under Branch pick “main” and “/ (root)”, then click Save.</span></div></li>
+          <li><div><strong>Open your board</strong><span>Wait about a minute, then refresh the Pages settings. Your link appears at the top. It looks like this:</span>
+            <div class="cmd"><code>https://YOUR-USERNAME.github.io/news-board/</code></div></div></li>
+          <li><div><strong>Post a new edition</strong><span>In your fork, open the data/days folder. Copy the newest file, name it with today's date (like 2026-11-04.json) and change the news, blog and quiz. Then open data/index.json, add the new date at the top of the list and set “latest” to it. Click Commit changes, and your board updates in about a minute.</span></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="nt-section" id="auto">
+      <div class="container">
+        <p class="eyebrow">Automatic · about 20 minutes</p>
+        <h2>Make it update <em>by itself</em></h2>
+        <p class="sub">Claude searches the news, writes the edition in Bangla and English and publishes it every morning. You need a paid Claude plan (Pro or Max) and the free Claude Code app.</p>
+        <ol class="modal-steps">
+          <li><div><strong>Download the code</strong><span>Open <a href="https://github.com/sandip617/news-board/archive/refs/heads/main.zip">this ZIP link</a>. Double-click the file in Downloads to unzip it. You get a folder called news-board-main.</span></div></li>
+          <li><div><strong>Install Claude Code</strong><span>Follow the steps at <a href="https://claude.com/claude-code" target="_blank" rel="noopener">claude.com/claude-code</a> and sign in with your Claude account. The desktop app or the VS Code extension are the easiest.</span></div></li>
+          <li><div><strong>Open the folder</strong><span>In Claude Code, open the news-board-main folder you just unzipped.</span></div></li>
+          <li><div><strong>Publish your board</strong><span>Paste this into Claude. It puts your board online on claude.ai and gives you a link that starts with https://claude.ai/artifact/. Copy that link.</span>
+            <div class="cmd block"><code>Follow Step 1 in SETUP_WITH_CLAUDE.md in this folder: publish index.html and the data folder as a new Artifact with the capabilities listed there, then give me the link.</code></div></div></li>
+          <li><div><strong>Create the daily update</strong><span>Paste this, with your link in place of the example. Claude adds your link to the instructions and sets up a “routine” that runs at 6:45 AM India time, so the new edition is ready by 7.</span>
+            <div class="cmd block"><code>In ROUTINE_PROMPT.md, replace YOUR_ARTIFACT_URL with https://claude.ai/artifact/PASTE-YOUR-LINK. Then follow Step 2 in SETUP_WITH_CLAUDE.md to create the daily routine.</code></div></div></li>
+          <li><div><strong>Test it once</strong><span>Paste this. After about 5 minutes, open your board link and check that a new edition is there.</span>
+            <div class="cmd block"><code>Run the News Board routine now, wait for it to finish, and tell me whether it published a new edition.</code></div></div></li>
+          <li><div><strong>Share it</strong><span>Open your board, click Share, and choose who can see it. To let classmates suggest blog topics, give them Contributor access.</span></div></li>
+        </ol>
+        <p class="sub" style="margin-top:22px">You can pause, change or delete the daily update any time at <a href="https://claude.ai/code/routines" target="_blank" rel="noopener"><strong>claude.ai/code/routines</strong></a>.</p>
+      </div>
+    </section>
+
+    <section class="nt-section" id="yours">
+      <div class="container">
+        <p class="eyebrow">Customise</p>
+        <h2>Make it <em>yours</em></h2>
+        <p class="sub">Change any of these, then ask Claude to “republish index.html to my News Board” or “update the News Board routine with the new ROUTINE_PROMPT.md”. On GitHub Pages, just commit the change.</p>
+        <div class="nb-wrap">
+          <table class="nb-table">
+            <thead><tr><th>What to change</th><th>Where</th></tr></thead>
+            <tbody>
+              <tr><td>Board name</td><td>In <code>index.html</code>, replace “Sandip's Board” (the title, the masthead and the two footer lines)</td></tr>
+              <tr><td>Colours</td><td><code>--paper</code>, <code>--ink</code> and <code>--red</code> at the top of <code>index.html</code></td></tr>
+              <tr><td>Who it's for (MBA, engineering, school…)</td><td>“BBA students” and the topic list in <code>ROUTINE_PROMPT.md</code></td></tr>
+              <tr><td>Languages</td><td>Step 5 of <code>ROUTINE_PROMPT.md</code>, and the menu text in the <code>T</code> section of <code>index.html</code></td></tr>
+              <tr><td>Update time</td><td>Tell Claude: “Change the News Board routine to run at 6 AM India time.”</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="nt-section" id="help">
+      <div class="container">
+        <p class="eyebrow">Stuck?</p>
+        <h2>If something <em>goes wrong</em></h2>
+        <div class="nt-help">
+          <div><strong>The board says today's edition hasn't arrived</strong><p>The data files didn't publish. On GitHub Pages, check that data/index.json lists a date that has a matching file in data/days. With Claude, open claude.ai/code/routines, click the latest run and read what it says.</p></div>
+          <div><strong>The routine ran but nothing changed</strong><p>Check that ROUTINE_PROMPT.md has your own link, not YOUR_ARTIFACT_URL. Then ask Claude to update the routine with the new file.</p></div>
+          <div><strong>Friends can't open the board</strong><p>A new board on claude.ai is private. Open it, click Share and change who has access.</p></div>
+          <div><strong>The topic suggestion box is missing</strong><p>It only works on claude.ai, because suggestions are saved in a shared database there. On GitHub Pages it's hidden.</p></div>
+          <div><strong>Still stuck?</strong><p>Message me on <a href="https://wa.me/917022232721" target="_blank" rel="noopener"><strong style="display:inline">WhatsApp</strong></a> or open an issue on <a href="https://github.com/sandip617/news-board/issues" target="_blank" rel="noopener"><strong style="display:inline">GitHub</strong></a>.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="container nt-foot">
+      <p>© <span id="year">2026</span> Sandip Pal · News Board is free and open source (MIT) · Not investment advice</p>
+      <a href="../../#series">← Back to Content Series</a>
+    </footer>
+  </main>
+
+  <script>
+    // Copy buttons for the commands and prompts
+    document.querySelectorAll(".cmd").forEach(box => {
+      const btn = document.createElement("button");
+      btn.type = "button"; btn.className = "copy-btn"; btn.textContent = "Copy";
+      btn.addEventListener("click", async () => {
+        try { await navigator.clipboard.writeText(box.querySelector("code").textContent); btn.textContent = "Copied ✓"; }
+        catch { btn.textContent = "Select & copy"; }
+        setTimeout(() => { btn.textContent = "Copy"; }, 1800);
+      });
+      box.append(btn);
+    });
+    document.getElementById("year").textContent = new Date().getFullYear();
+    // Header border once the page is scrolled
+    const header = document.querySelector(".site-header");
+    addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 8), { passive: true });
+  </script>
+</body>
+
+</html>
