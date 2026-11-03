@@ -145,10 +145,8 @@
           <li><div><strong>Sign in to Xcode</strong><span>Xcode → Settings → Accounts → + → Apple ID. A free Apple ID is enough. Select your team, click Manage Certificates, then + → Apple Development.</span></div></li>
           <li><div><strong>Find your Team ID</strong><span>Open Terminal (Cmd + Space, type Terminal) and paste this. Copy the 10-character code after OU=.</span>
             <div class="cmd"><code>security find-certificate -c "Apple Development" -p | openssl x509 -noout -subject</code></div></div></li>
-          <li><div><strong>Build the app</strong><span>Paste this in Terminal, replacing YOURTEAMID with your code. Wait for “✓ Built”.</span>
+          <li><div><strong>Build &amp; install the app</strong><span>Paste this in Terminal, replacing YOURTEAMID with your code. It builds NN Tab, puts it in your Applications folder and opens it. Wait for “✓ Installed”.</span>
             <div class="cmd"><code>cd ~/Downloads/Safari-New_Tab_Extension-main &amp;&amp; TEAM_ID=YOURTEAMID zsh scripts/build-safari.sh</code></div></div></li>
-          <li><div><strong>Open NN Tab once</strong><span>This moves the app to Applications and opens it. You can close it after it opens.</span>
-            <div class="cmd"><code>cp -R "safari-app/build/Build/Products/Release/NN Tab.app" /Applications/ &amp;&amp; open "/Applications/NN Tab.app"</code></div></div></li>
           <li><div><strong>Turn it on in Safari</strong><span>Safari → Settings → Extensions → tick NN Tab.</span></div></li>
           <li><div><strong>Make it your new tab</strong><span>Safari → Settings → General → set “New windows open with” and “New tabs open with” to NN Tab.</span></div></li>
           <li><div><strong>Allow bookmark icons</strong><span>Click the NN Tab button in the Safari toolbar → Allow on all websites. NN Tab needs this to fetch website icons.</span></div></li>
@@ -187,7 +185,7 @@
         <p class="eyebrow">Stuck?</p>
         <h2>If something <em>goes wrong</em></h2>
         <div class="nt-help">
-          <div><strong>NN Tab is missing in Safari Extensions</strong><p>Safari → Settings → Advanced → tick “Show features for web developers”. Then Develop menu → Allow Unsigned Extensions, and check Extensions again.</p></div>
+          <div><strong>NN Tab is missing in Safari Extensions</strong><p>Run the build command from step 5 again. It reinstalls NN Tab in Applications and adds it back to Safari. NN Tab needs macOS 11 or later. If it still doesn’t show: Safari → Settings → Advanced → tick “Show features for web developers”, then Develop menu → Allow Unsigned Extensions.</p></div>
           <div><strong>“xcodebuild” error in Terminal</strong><p>Run this, enter your Mac password, then build again.</p><div class="cmd"><code>sudo xcode-select -s /Applications/Xcode.app</code></div></div>
           <div><strong>Bookmark icons don’t show</strong><p>Click the NN Tab button in the Safari toolbar and choose Allow on all websites.</p></div>
           <div><strong>Still stuck?</strong><p>Message me on <a href="https://wa.me/917022232721" target="_blank" rel="noopener"><strong style="display:inline">WhatsApp</strong></a> or open an issue on <a href="https://github.com/sandip617/Safari-New_Tab_Extension/issues" target="_blank" rel="noopener"><strong style="display:inline">GitHub</strong></a>.</p></div>
