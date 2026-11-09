@@ -199,7 +199,7 @@ const playbooks = {
   },
   series: {
     type: "Content",
-    title: "Content Series",
+    title: "Project",
     text: "A repeatable content format that makes a brand recognisable and gives people a reason to come back.",
     work: [
       {
