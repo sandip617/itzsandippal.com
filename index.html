@@ -543,6 +543,43 @@
     </div>
   </div>
 
+  <!-- ===== Newsletter popup: opens once when the visitor reaches 50% of the page ===== -->
+  <div class="nl-pop" id="nlPop" aria-hidden="true">
+    <div class="nl-backdrop" data-nl-close></div>
+    <div class="nl-card" role="dialog" aria-modal="true" aria-labelledby="nlTitle" aria-describedby="nlText">
+      <button class="nl-close" type="button" data-nl-close aria-label="Close">×</button>
+      <div class="nl-head"><span>NEWSLETTER</span><span>50% READ</span></div>
+      <div class="nl-meter" aria-hidden="true"><i></i></div>
+
+      <div class="nl-body">
+        <p class="eyebrow">Halfway down the funnel</p>
+        <h2 id="nlTitle">This is the part where I ask for your <em>email</em>.</h2>
+        <p class="nl-text" id="nlText">New projects, marketing notes and behind-the-scenes from my work. No spam, and you can
+          unsubscribe in one click.</p>
+        <!-- Posts to the MailerLite form "Website popup (50% scroll)" → group "Website newsletter" -->
+        <form class="nl-form" id="nlForm"
+          action="https://assets.mailerlite.com/jsonp/2780838/forms/203667046511150673/subscribe" method="post" novalidate>
+          <label class="nl-field">
+            <span class="sr-only">Email address</span>
+            <input type="email" name="fields[email]" placeholder="you@email.com" autocomplete="email" required>
+          </label>
+          <input type="hidden" name="ml-submit" value="1">
+          <input type="hidden" name="anticsrf" value="true">
+          <button class="btn btn-primary" type="submit">Subscribe <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="nl-note" id="nlNote" role="status" aria-live="polite">You’ll get one email to confirm. That’s it.</p>
+        <button class="nl-skip" type="button" data-nl-close>No thanks, I’ll keep scrolling</button>
+      </div>
+
+      <div class="nl-done" id="nlDone" hidden>
+        <span class="nl-done-badge" aria-hidden="true">✓</span>
+        <h2>You’re in. <em>Almost.</em></h2>
+        <p>Check your inbox for a confirmation email and tap the link. Then you’re on the list.</p>
+        <button class="btn btn-primary" type="button" data-nl-close>Back to the site <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 

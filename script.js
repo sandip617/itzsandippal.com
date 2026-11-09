@@ -396,6 +396,123 @@ document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a => {
   a.href = `https://wa.me/${siteConfig.whatsapp}`;
 });
 
+/* ---------- newsletter popup: opens once at 50% scroll ---------- */
+(() => {
+  const pop = document.getElementById("nlPop");
+  if (!pop) return;
+  const nlForm = document.getElementById("nlForm");
+  const nlNote = document.getElementById("nlNote");
+  const nlBody = pop.querySelector(".nl-body");
+  const nlDone = document.getElementById("nlDone");
+  const nlEmail = nlForm.querySelector('input[type="email"]');
+  const nlBtn = nlForm.querySelector('button[type="submit"]');
+  const defaultNote = nlNote.textContent;
+  const KEY_SUBSCRIBED = "nl:subscribed";
+  const KEY_DISMISSED = "nl:dismissedAt";
+  const SNOOZE_DAYS = 7; // after "No thanks", stay quiet for a week
+
+  // localStorage can be blocked (private mode etc.); the popup then just won't remember
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch { } }
+  };
+  const track = (name, params) => { if (typeof gtag === "function") gtag("event", name, params); };
+
+  function snoozed() {
+    if (store.get(KEY_SUBSCRIBED)) return true;
+    const at = Number(store.get(KEY_DISMISSED));
+    return at > 0 && Date.now() - at < SNOOZE_DAYS * 864e5;
+  }
+
+  let lastFocus = null;
+
+  function openPop() {
+    window.removeEventListener("scroll", checkScroll);
+    lastFocus = document.activeElement;
+    pop.classList.add("open");
+    pop.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    setTimeout(() => nlEmail.focus({ preventScroll: true }), 80);
+    track("newsletter_popup_view");
+  }
+
+  function closePop() {
+    if (!pop.classList.contains("open")) return;
+    pop.classList.remove("open");
+    pop.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (!store.get(KEY_SUBSCRIBED)) store.set(KEY_DISMISSED, String(Date.now()));
+    if (lastFocus) lastFocus.focus({ preventScroll: true });
+  }
+
+  function checkScroll() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    if (max <= 0 || window.scrollY / max < 0.5) return;
+    // never stack on top of the playbook modal; try again on the next scroll after it closes
+    if (modal.classList.contains("open")) return;
+    openPop();
+  }
+
+  if (!snoozed()) window.addEventListener("scroll", checkScroll, { passive: true });
+
+  pop.querySelectorAll("[data-nl-close]").forEach(el => el.addEventListener("click", closePop));
+  document.addEventListener("keydown", e => {
+    if (!pop.classList.contains("open")) return;
+    if (e.key === "Escape") closePop();
+    if (e.key === "Tab") { // keep keyboard focus inside the popup
+      const items = [...pop.querySelectorAll("button, input:not([type=hidden])")].filter(el => el.offsetParent !== null);
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  function setNote(text, isError = false) {
+    nlNote.textContent = text;
+    nlNote.classList.toggle("is-error", isError);
+    nlForm.classList.toggle("has-error", isError);
+  }
+
+  async function subscribe() {
+    try {
+      const res = await fetch(nlForm.action, { method: "POST", body: new FormData(nlForm) });
+      const data = await res.json();
+      if (data.success) return { ok: true };
+      return { ok: false, msg: data.errors?.fields?.email?.[0] || "That didn’t work. Please check the email and try again." };
+    } catch {
+      return { ok: false, msg: "Couldn’t reach the server. Please try again in a moment." };
+    }
+  }
+
+  nlForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (nlForm.classList.contains("is-loading")) return;
+    if (!nlEmail.value.trim() || !nlEmail.checkValidity()) {
+      setNote("Please enter a valid email address.", true);
+      nlEmail.focus();
+      return;
+    }
+    nlForm.classList.add("is-loading");
+    nlBtn.setAttribute("aria-disabled", "true");
+    setNote("Subscribing…");
+    const result = await subscribe();
+    nlForm.classList.remove("is-loading");
+    nlBtn.removeAttribute("aria-disabled");
+    if (!result.ok) { setNote(result.msg, true); return; }
+
+    store.set(KEY_SUBSCRIBED, "1");
+    nlBody.hidden = true;
+    nlDone.hidden = false;
+    nlDone.querySelector("button").focus({ preventScroll: true });
+    track("sign_up", { method: "newsletter_popup" });
+  });
+
+  nlEmail.addEventListener("input", () => {
+    if (nlNote.classList.contains("is-error")) setNote(defaultNote);
+  });
+})();
+
 /* Coming back from a project page (…/#series) reopens that playbook */
 if (location.hash === "#series") {
   document.getElementById("work")?.scrollIntoView();

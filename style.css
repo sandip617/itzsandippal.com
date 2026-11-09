@@ -23,7 +23,9 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+/* `clip` (not `hidden`) stops wide decorations like the ticker from widening the page on phones,
+   without turning html/body into scroll containers (which would break the sticky header) */
+html { scroll-behavior: smooth; overflow-x: clip; }
 
 body {
   font-family: var(--sans);
@@ -31,7 +33,8 @@ body {
   color: var(--ink);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: hidden; /* fallback for browsers without `clip` */
+  overflow-x: clip;
 }
 
 /* faint paper grain */
@@ -678,6 +681,64 @@ h2 em { letter-spacing: -.02em; color: var(--blue); }
 .work-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 4px; }
 .work-actions .project-open { text-decoration: none; color: var(--ink); }
 .work-actions .project-open:hover { background: var(--ink); color: var(--paper); }
+
+/* ---------- newsletter popup (opens once at 50% scroll) ---------- */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.nl-pop { position: fixed; inset: 0; z-index: 3100; display: grid; place-items: center; padding: 20px; visibility: hidden; opacity: 0; transition: opacity .35s, visibility .35s; }
+.nl-pop.open { visibility: visible; opacity: 1; }
+.nl-pop [hidden] { display: none !important; }
+.nl-backdrop { position: absolute; inset: 0; background: rgba(17, 16, 20, .55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.nl-card {
+  position: relative;
+  width: min(520px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 28px 34px 26px;
+  border-radius: 28px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .65);
+  /* enters tilted, like the brief card, then settles straight */
+  transform: translateY(28px) rotate(-2deg) scale(.96);
+  transition: transform .55s var(--ease);
+}
+.nl-pop.open .nl-card { transform: none; }
+.nl-close { position: absolute; right: 16px; top: 16px; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); font-size: 1.35rem; line-height: 1; cursor: pointer; transition: background .25s, color .25s; }
+.nl-close:hover { background: var(--ink); color: var(--paper); }
+.nl-head { display: flex; justify-content: space-between; margin-right: 50px; padding: 9px 0 14px; border-bottom: 2px solid var(--ink); font-size: .72rem; font-weight: 800; letter-spacing: .16em; }
+/* the site's scroll-progress bar, frozen at 50% */
+.nl-meter { height: 6px; margin: 14px 0 24px; border-radius: 99px; background: var(--paper-2); overflow: hidden; }
+.nl-meter i { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--blue), var(--orange)); transition: width 1s .3s var(--ease); }
+.nl-pop.open .nl-meter i { width: 50%; }
+.nl-card .eyebrow { margin-bottom: 10px; }
+.nl-card h2 { font-size: clamp(1.9rem, 4.4vw, 2.6rem); line-height: 1.04; letter-spacing: -.04em; margin-bottom: 14px; }
+.nl-text { color: var(--muted); margin-bottom: 22px; }
+.nl-form { display: flex; gap: 8px; padding: 6px; border: 1.5px solid var(--ink); border-radius: 999px; background: var(--card); transition: border-color .25s, box-shadow .25s; }
+.nl-form:focus-within { box-shadow: 0 0 0 4px var(--blue-soft); }
+.nl-form.has-error { border-color: #c2410c; }
+.nl-field { flex: 1; min-width: 0; display: flex; }
+.nl-field input { width: 100%; border: 0; background: none; outline: none; padding: 0 16px; font-weight: 600; }
+.nl-field input::placeholder { color: color-mix(in srgb, var(--muted) 70%, transparent); }
+.nl-form .btn { padding: 12px 20px; white-space: nowrap; }
+.nl-form.is-loading .btn { opacity: .6; cursor: progress; }
+.nl-note { min-height: 1.5em; margin-top: 10px; padding-left: 18px; font-size: .82rem; color: var(--muted); }
+.nl-note.is-error { color: #c2410c; font-weight: 600; }
+.nl-skip { display: block; margin: 16px auto 0; border: 0; background: none; color: var(--muted); font-size: .85rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.nl-skip:hover { color: var(--ink); }
+.nl-done { padding: 4px 0 6px; }
+.nl-done-badge { display: grid; place-items: center; width: 54px; height: 54px; margin-bottom: 16px; border-radius: 50%; background: var(--lime); font-size: 1.5rem; font-weight: 800; }
+.nl-done p { color: var(--muted); margin-bottom: 22px; }
+
+/* phones: slides up as a bottom sheet instead of a centred card */
+@media (max-width: 640px) {
+  .nl-pop { place-items: end center; padding: 0; }
+  .nl-card { width: 100%; max-height: 92vh; padding: 22px 20px calc(22px + env(safe-area-inset-bottom)); border-radius: 26px 26px 0 0; transform: translateY(100%); }
+  .nl-close { right: 14px; top: 14px; }
+  .nl-form { flex-direction: column; border-radius: 20px; }
+  .nl-field input { padding: 12px 12px; }
+  .nl-form .btn { justify-content: center; }
+  .nl-note { padding-left: 4px; }
+}
 
 /* ---------- reveal ---------- */
 /* uses `translate` so it never fights hover `transform` effects */
