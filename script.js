@@ -474,9 +474,9 @@ document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a => {
     nlForm.classList.toggle("has-error", isError);
   }
 
-  async function subscribe() {
+  async function subscribe(form = nlForm) {
     try {
-      const res = await fetch(nlForm.action, { method: "POST", body: new FormData(nlForm) });
+      const res = await fetch(form.action, { method: "POST", body: new FormData(form) });
       const data = await res.json();
       if (data.success) return { ok: true };
       return { ok: false, msg: data.errors?.fields?.email?.[0] || "That didn’t work. Please check the email and try again." };
@@ -511,6 +511,42 @@ document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a => {
   nlEmail.addEventListener("input", () => {
     if (nlNote.classList.contains("is-error")) setNote(defaultNote);
   });
+
+  /* footer signup: same MailerLite form; subscribing here also stops the popup */
+  const fnForm = document.getElementById("footerNlForm");
+  if (fnForm) {
+    const fnNote = document.getElementById("footerNlNote");
+    const fnEmail = fnForm.querySelector('input[type="email"]');
+    const fnDefault = fnNote.textContent;
+    const setFn = (text, state = "") => {
+      fnNote.textContent = text;
+      fnNote.classList.toggle("is-error", state === "error");
+      fnNote.classList.toggle("is-done", state === "done");
+      fnForm.classList.toggle("has-error", state === "error");
+    };
+    fnForm.addEventListener("submit", async e => {
+      e.preventDefault();
+      if (fnForm.classList.contains("is-loading")) return;
+      if (!fnEmail.value.trim() || !fnEmail.checkValidity()) {
+        setFn("Please enter a valid email address.", "error");
+        fnEmail.focus();
+        return;
+      }
+      fnForm.classList.add("is-loading");
+      setFn("Subscribing…");
+      const result = await subscribe(fnForm);
+      fnForm.classList.remove("is-loading");
+      if (!result.ok) { setFn(result.msg, "error"); return; }
+      store.set(KEY_SUBSCRIBED, "1");
+      window.removeEventListener("scroll", checkScroll);
+      fnForm.hidden = true;
+      setFn("You’re in. Check your inbox and tap the confirmation link.", "done");
+      track("sign_up", { method: "newsletter_footer" });
+    });
+    fnEmail.addEventListener("input", () => {
+      if (fnNote.classList.contains("is-error")) setFn(fnDefault);
+    });
+  }
 })();
 
 /* Coming back from a project page (…/#series) reopens that playbook */

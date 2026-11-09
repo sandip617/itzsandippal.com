@@ -595,6 +595,32 @@ h2 em { letter-spacing: -.02em; color: var(--blue); }
 .ff-arrow { color: #5e5a66; }
 .footer-big { font-size: clamp(2.2rem, 6vw, 5rem); line-height: 1; letter-spacing: -.045em; font-weight: 700; margin-bottom: 60px; }
 .footer-big em { color: var(--orange); }
+/* footer newsletter signup */
+.footer-news { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 56px; padding: 32px; border-radius: 26px; background: var(--ink-2); border: 1px solid #2e2c35; }
+.footer-news .eyebrow { color: var(--lime); margin-bottom: 10px; }
+.fn-copy h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); line-height: 1.1; letter-spacing: -.035em; }
+.fn-copy h3 em { color: var(--lime); }
+.fn-copy > p:last-child { margin-top: 10px; color: #b9b4bf; font-size: .95rem; }
+.fn-form { display: flex; gap: 8px; padding: 6px; border: 1.5px solid #3a3742; border-radius: 999px; background: var(--ink); transition: border-color .25s, box-shadow .25s; }
+.fn-form:focus-within { border-color: var(--lime); box-shadow: 0 0 0 4px rgba(216, 240, 92, .15); }
+.fn-form.has-error { border-color: #ff8a65; }
+.fn-form .nl-field input { color: var(--paper); }
+.fn-form .nl-field input::placeholder { color: #8a8592; }
+.fn-btn { padding: 12px 20px; border-color: var(--lime); background: var(--lime); color: var(--ink); white-space: nowrap; }
+.fn-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -10px var(--lime); }
+.fn-form[hidden] { display: none; }
+.fn-form.is-loading .fn-btn { opacity: .6; cursor: progress; }
+.fn-note { min-height: 1.5em; margin-top: 10px; padding-left: 18px; font-size: .82rem; color: #9c97a3; }
+.fn-note.is-error { color: #ff8a65; font-weight: 600; }
+.fn-note.is-done { color: var(--lime); font-weight: 700; }
+@media (max-width: 980px) { .footer-news { grid-template-columns: 1fr; gap: 22px; } }
+@media (max-width: 640px) {
+  .footer-news { padding: 24px 20px; }
+  .fn-form { flex-direction: column; border-radius: 20px; }
+  .fn-form .nl-field input { padding: 12px; }
+  .fn-btn { justify-content: center; }
+  .fn-note { padding-left: 4px; }
+}
 .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid #2e2c35; font-size: .88rem; color: #9c97a3; }
 .footer-inner a:hover { color: var(--lime); }
 

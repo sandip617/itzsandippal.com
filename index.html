@@ -68,7 +68,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261109">
+  <link rel="stylesheet" href="style.css?v=20261109b">
 </head>
 
 <body>
@@ -514,6 +514,27 @@
         <span class="ff-step" id="ffAction">Action?</span>
       </div>
       <p class="footer-big">That was a marketing funnel.<br><em>Did it work on you?</em></p>
+      <!-- Footer newsletter signup: same MailerLite form as the popup -->
+      <div class="footer-news">
+        <div class="fn-copy">
+          <p class="eyebrow">Newsletter</p>
+          <h3>Not ready for a brief? <em>Get the newsletter.</em></h3>
+          <p>New projects, marketing notes and behind-the-scenes. No spam, unsubscribe in one click.</p>
+        </div>
+        <div class="fn-side">
+          <form class="fn-form" id="footerNlForm"
+            action="https://assets.mailerlite.com/jsonp/2780838/forms/203667046511150673/subscribe" method="post" novalidate>
+            <label class="nl-field">
+              <span class="sr-only">Email address</span>
+              <input type="email" name="fields[email]" placeholder="you@email.com" autocomplete="email" required>
+            </label>
+            <input type="hidden" name="ml-submit" value="1">
+            <input type="hidden" name="anticsrf" value="true">
+            <button class="btn fn-btn" type="submit">Subscribe <span aria-hidden="true">→</span></button>
+          </form>
+          <p class="fn-note" id="footerNlNote" role="status" aria-live="polite">You’ll get one email to confirm.</p>
+        </div>
+      </div>
       <div class="footer-inner">
         <p>© <span id="year"></span> Sandip Pal · BBA, Jain University, Bangalore</p>
         <a href="#top">Back to top ↑</a>
@@ -580,7 +601,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=20261109"></script>
+  <script src="script.js?v=20261109b"></script>
 </body>
 
 </html>
