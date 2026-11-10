@@ -693,6 +693,11 @@ h2 em { letter-spacing: -.02em; color: var(--blue); }
 .work-thumb-newtab .nt-clock { font-family: var(--sans); font-size: 2.6rem; font-weight: 300; letter-spacing: -.03em; color: #fff; text-shadow: none; }
 .work-thumb-newtab .nt-tiles { display: flex; gap: 8px; }
 .work-thumb-newtab .nt-tiles i { width: 26px; height: 26px; border-radius: 8px; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .16); }
+/* YT Premium Vibe thumbnail: logo on a dark pink/purple glow */
+.work-thumb-ytvibe { background: radial-gradient(circle at 25% 20%, rgba(236, 72, 153, .45), transparent 60%), radial-gradient(circle at 85% 90%, rgba(139, 92, 246, .45), transparent 60%), #0b0b10; align-content: center; justify-items: center; gap: 12px; }
+.work-thumb-ytvibe .yv-logo { width: 56px; height: 56px; border-radius: 14px; background: #fff; }
+.work-thumb-ytvibe .yv-pills { display: flex; gap: 8px; }
+.work-thumb-ytvibe .yv-pills i { font-style: normal; font-family: var(--sans); font-size: .72rem; font-weight: 700; color: #fff; text-shadow: none; padding: 6px 11px; border-radius: 999px; background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .18); }
 /* News Board thumbnail: a newspaper front page */
 .work-thumb-news { background: #f5f1e8; align-content: center; gap: 6px; padding: 0 22px; }
 .work-thumb-news span { text-shadow: none; color: #1b1814; }

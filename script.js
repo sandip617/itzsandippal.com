@@ -219,6 +219,14 @@ const playbooks = {
         thumb: "newtab"
       },
       {
+        type: "Browser Extension · Safari for Mac",
+        title: "YT Premium Vibe",
+        desc: "Makes YouTube feel premium in Safari. Blocks ads, skips sponsors, hides Shorts, summarises any video with AI in English or Bangla, downloads video or audio and boosts volume up to 300%. Eleven features in one extension, each one switchable.",
+        code: "https://github.com/sandip617/YT-Premium-Vibe-Extension",
+        page: "projects/yt-premium-vibe/",
+        thumb: "ytvibe"
+      },
+      {
         type: "Daily Newspaper · Bangla & English",
         title: "News Board",
         desc: "A daily business newspaper for BBA students that updates itself every morning at 7 AM. Global news with a \"why it matters\" note, an AI-written blog, term of the day, GD topic, quiz, weekly case study and market snapshot. Free and open source, with a guide to run your own.",
@@ -252,6 +260,8 @@ const workThumbs = {
   newtab: '<img class="nt-logo" src="projects/nn-tab/logo.png" alt="" width="40" height="40">' +
     '<span class="nt-clock">09:41</span>' +
     '<span class="nt-tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>',
+  ytvibe: '<img class="yv-logo" src="projects/yt-premium-vibe/logo.png" alt="" width="56" height="56">' +
+    '<span class="yv-pills" aria-hidden="true"><i>✦ AI Summary</i><i>↓ Download</i></span>',
   news: '<span class="nb-date">TUESDAY · 3 NOVEMBER</span><span class="nb-mast">News Board</span>' +
     '<span class="nb-cols" aria-hidden="true"><i></i><i></i><i></i></span>'
 };
