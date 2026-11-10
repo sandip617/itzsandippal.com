@@ -706,6 +706,9 @@ h2 em { letter-spacing: -.02em; color: var(--blue); }
 .work-thumb-news .nb-cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; width: min(240px, 100%); }
 .work-thumb-news .nb-cols i { height: 22px; background: repeating-linear-gradient(#1b1814 0 2px, transparent 2px 6px); opacity: .22; }
 .work-thumb-news .nb-cols i:first-child { opacity: .4; }
+.work-help { margin-top: 6px; padding: 14px 18px; border-radius: 14px; border: 1px dashed var(--line); color: var(--muted); font-size: .93rem; }
+.work-help a { font-weight: 700; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.work-help a:hover { color: var(--blue); }
 .work-info { padding: 18px 20px 20px; display: grid; gap: 8px; }
 .work-info h3 { font-size: 1.3rem; letter-spacing: -.02em; line-height: 1.2; }
 .work-desc { color: var(--muted); font-size: .93rem; }

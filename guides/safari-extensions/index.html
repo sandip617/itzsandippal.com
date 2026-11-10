@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turn on a Safari extension — Step-by-step guide · Sandip Pal</title>
+  <meta name="description" content="How to turn on a Safari extension on Mac, step by step: developer settings, unsigned extensions, the Extensions list and website access. For NN Tab and YT Premium Vibe.">
+  <meta name="author" content="Sandip Pal">
+  <meta name="theme-color" content="#f5f2ec">
+  <link rel="canonical" href="https://itzsandippal.com/guides/safari-extensions/">
+  <link rel="icon" type="image/svg+xml" href="../../logo.svg">
+  <link rel="icon" type="image/png" href="../../logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    [hidden] { display: none !important; }
+    .nt-back { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: .9rem; white-space: nowrap; }
+    .nt-back:hover { background: var(--ink); color: var(--paper); }
+
+    .g-hero { padding: 56px 0 28px; max-width: 760px; }
+    .g-hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: .98; letter-spacing: -.05em; margin-bottom: 16px; }
+    .g-hero h1 em { color: var(--blue); }
+    .g-hero .lead { color: var(--muted); font-size: 1.05rem; }
+
+    /* Project chooser */
+    .g-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 26px 0 8px; }
+    .g-pick > span { font-weight: 700; font-size: .92rem; margin-right: 4px; }
+    .g-pick button { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px 9px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font: 700 .9rem var(--sans, inherit); color: var(--ink); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+    .g-pick button img { width: 24px; height: 24px; border-radius: 6px; }
+    .g-pick button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+    /* Progress */
+    .g-progress { position: sticky; top: 64px; z-index: 5; display: flex; align-items: center; gap: 14px; padding: 12px 0; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    .g-bar { flex: 1; height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+    .g-bar i { display: block; height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, #ec4899, #8b5cf6); transition: width .4s cubic-bezier(.2, .8, .2, 1); }
+    .g-count { font-weight: 800; font-size: .9rem; min-width: 92px; text-align: right; }
+
+    /* Step cards */
+    .g-steps { display: grid; gap: 18px; padding: 26px 0 10px; }
+    .g-step { display: grid; gap: 20px; padding: 22px; border-radius: var(--radius, 22px); background: var(--card); border: 1px solid var(--line); scroll-margin-top: 130px; transition: opacity .3s, filter .3s, border-color .3s; }
+    .g-step.done { border-color: color-mix(in srgb, #22c55e 45%, var(--line)); }
+    .g-step.skip { opacity: .45; filter: grayscale(.6); }
+    .g-step.flash { animation: g-flash 1.6s ease; }
+    @keyframes g-flash { 0%, 100% { box-shadow: none; } 30% { box-shadow: 0 0 0 4px rgba(236, 72, 153, .35); } }
+    .g-head { display: flex; gap: 14px; align-items: flex-start; }
+    .g-num { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: var(--paper); font-weight: 800; }
+    .g-step.done .g-num { background: #22c55e; }
+    .g-head h2 { font-size: 1.35rem; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 6px; }
+    .g-head p { color: var(--muted); font-size: .97rem; }
+    .g-head p b { color: var(--ink); }
+    .g-tag { display: inline-block; margin-left: 6px; padding: 2px 9px; border-radius: 99px; font-size: .72rem; font-weight: 800; vertical-align: middle; background: rgba(236, 72, 153, .12); color: #be185d; }
+    .g-tag.opt { background: var(--line); color: var(--muted); }
+    .g-check { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--paper); font-weight: 700; font-size: .88rem; cursor: pointer; user-select: none; }
+    .g-check input { width: 18px; height: 18px; accent-color: #22c55e; }
+    .g-alt { margin-top: 10px; font-size: .88rem; color: var(--muted); }
+
+    /* Illustrated Safari window */
+    .mock { border-radius: 14px; overflow: hidden; border: 1px solid #d9d6d0; background: #fbfaf8; box-shadow: 0 20px 40px -24px rgba(17, 16, 20, .35); font: 13px/1.35 -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; color: #1d1d1f; }
+    .mock-bar { display: flex; align-items: center; gap: 7px; padding: 10px 12px; background: #ecebe8; border-bottom: 1px solid #dcdad6; }
+    .mock-bar i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+    .mock-bar i:nth-child(2) { background: #febc2e; } .mock-bar i:nth-child(3) { background: #28c840; }
+    .mock-bar b { flex: 1; text-align: center; font-weight: 600; font-size: 12.5px; color: #555; margin-right: 40px; }
+    .mock-tabs { display: flex; gap: 2px; padding: 8px 10px; background: #f3f2ef; border-bottom: 1px solid #e3e1dd; overflow-x: auto; scrollbar-width: none; }
+    .mock-tabs span { flex: none; display: grid; justify-items: center; gap: 3px; padding: 6px 9px; border-radius: 8px; font-size: 11px; color: #555; }
+    .mock-tabs span::before { content: ""; width: 20px; height: 20px; border-radius: 6px; background: #c9c6c0; }
+    .mock-tabs span.on { background: #e2e0dc; color: #111; font-weight: 600; }
+    .mock-tabs span.on::before { background: #2f6fed; }
+    .mock-body { padding: 18px 20px 22px; display: grid; gap: 10px; }
+    .mock-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; color: #444; }
+    .mock-row .box { flex: none; width: 15px; height: 15px; border-radius: 4px; border: 1.5px solid #9a978f; background: #fff; }
+    .mock-row.dim { opacity: .5; }
+    .mock-row.hot { position: relative; color: #111; font-weight: 600; background: #fff; }
+    .mock-row.hot .box { border-color: #2f6fed; background: #2f6fed; box-shadow: inset 0 0 0 2px #fff; }
+    .hot::after { content: ""; position: absolute; inset: -5px; border-radius: 12px; border: 2.5px solid #ec4899; animation: g-ring 1.6s ease-in-out infinite; pointer-events: none; }
+    @keyframes g-ring { 0%, 100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, .45); } 50% { box-shadow: 0 0 0 7px rgba(236, 72, 153, 0); } }
+    .mock-split { display: grid; grid-template-columns: 170px 1fr; min-height: 150px; }
+    .mock-list { border-right: 1px solid #e3e1dd; padding: 10px; display: grid; align-content: start; gap: 4px; background: #f6f5f2; }
+    .mock-list .mock-row { padding: 6px 8px; }
+    .mock-list .ext { width: 18px; height: 18px; border-radius: 5px; background: #c9c6c0; flex: none; }
+    .mock-list .ext img { width: 18px; height: 18px; border-radius: 5px; display: block; }
+    .mock-detail { padding: 16px; color: #666; font-size: 12px; display: grid; align-content: start; gap: 8px; }
+    .mock-detail strong { color: #111; font-size: 14px; }
+    .mock-menu { padding: 0; }
+    .mock-menubar { display: flex; gap: 18px; padding: 7px 14px; background: #f3f2ef; border-bottom: 1px solid #e3e1dd; font-weight: 600; font-size: 12.5px; }
+    .mock-menubar span:first-child { font-size: 15px; line-height: 1; }
+    .mock-drop { margin: 0 0 18px 34px; width: 230px; border-radius: 10px; background: #fff; border: 1px solid #e0ded9; box-shadow: 0 14px 30px -14px rgba(0, 0, 0, .3); padding: 6px; }
+    .mock-drop .mock-row { justify-content: space-between; padding: 6px 10px; }
+    .mock-drop .mock-row kbd { font: 12px -apple-system, sans-serif; color: #888; }
+    .mock-drop hr { border: 0; border-top: 1px solid #eee; margin: 4px 0; }
+    .mock-toolbar { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: #f3f2ef; }
+    .mock-url { flex: 1; padding: 7px 12px; border-radius: 8px; background: #e6e4e0; color: #555; text-align: center; font-size: 12px; }
+    .mock-icon { position: relative; width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: #fff; }
+    .mock-icon img { width: 22px; height: 22px; border-radius: 5px; }
+    .mock-pop { margin: 0 14px 18px auto; width: 250px; border-radius: 12px; background: #fff; border: 1px solid #e0ded9; box-shadow: 0 14px 30px -14px rgba(0, 0, 0, .3); padding: 10px; display: grid; gap: 6px; font-size: 12px; color: #555; }
+    .mock-pop .mock-row { padding: 7px 10px; }
+
+    .g-box { margin: 14px 0 0; padding: 18px 20px; border-radius: 16px; background: #fff7e0; border: 1px solid #f3dd9b; }
+    .g-box strong { display: block; margin-bottom: 4px; }
+    .g-box p { color: #6b5a22; font-size: .95rem; }
+    .g-box.hide { display: none; }
+    .g-done { display: none; margin: 18px 0 0; padding: 18px 20px; border-radius: 16px; background: #e8f9ee; border: 1px solid #a7e3bd; font-weight: 700; }
+    .g-done.show { display: block; }
+
+    .g-help { display: grid; gap: 12px; padding: 36px 0 20px; max-width: 780px; }
+    .g-help h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); letter-spacing: -.04em; margin-bottom: 4px; }
+    .g-help div { padding: 16px 18px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+    .g-help strong { display: block; margin-bottom: 4px; }
+    .g-help p { color: var(--muted); font-size: .95rem; }
+
+    .nt-foot { padding: 34px 0 60px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; color: var(--muted); font-size: .9rem; }
+    .nt-foot a { font-weight: 700; color: var(--ink); }
+
+    @media (min-width: 900px) { .g-step { grid-template-columns: 5fr 6fr; align-items: center; } }
+
+    /* Embedded in the side panel of a project page: only the steps */
+    body.embed .site-header, body.embed .g-hero .eyebrow, body.embed .nt-foot, body.embed .g-help { display: none; }
+    body.embed .g-hero { padding: 18px 0 0; }
+    body.embed .g-hero h1 { font-size: 1.9rem; }
+    body.embed .g-hero .lead { font-size: .95rem; }
+    body.embed .g-progress { top: 0; }
+    body.embed .g-step { grid-template-columns: 1fr; padding: 18px; }
+    body.embed .container { width: min(100% - 32px, 1200px); }
+  </style>
+</head>
+
+<body>
+  <header class="site-header" id="top">
+    <nav class="nav container">
+      <a class="brand" href="../../" aria-label="Sandip Pal home">
+        <img class="brand-mark" src="../../logo.svg" alt="" width="40" height="40">
+        <span class="brand-name">Sandip Pal</span>
+      </a>
+      <a class="nt-back" href="../../#series">← Back to Project</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="container g-hero">
+      <p class="eyebrow">Guide · Safari on Mac · 2 minutes</p>
+      <h1>Turn on a <em>Safari extension</em></h1>
+      <p class="lead">Safari keeps extensions you install yourself switched off until you allow them. Follow these steps once. Tick each step as you go.</p>
+      <div class="g-pick" role="group" aria-label="Which extension are you installing?">
+        <span>Installing:</span>
+        <button type="button" data-for="yt" aria-pressed="true"><img src="../../projects/yt-premium-vibe/logo.png" alt="">YT Premium Vibe</button>
+        <button type="button" data-for="nntab" aria-pressed="false"><img src="../../projects/nn-tab/logo.png" alt="">NN Tab</button>
+      </div>
+    </section>
+
+    <div class="g-progress">
+      <div class="container" style="display:flex;align-items:center;gap:14px;width:min(100% - 32px, 1200px)">
+        <div class="g-bar"><i id="bar"></i></div>
+        <span class="g-count" id="count">0 of 5 done</span>
+      </div>
+    </div>
+
+    <section class="container">
+      <div class="g-steps">
+
+        <article class="g-step" id="settings" data-need="yt nntab">
+          <div class="g-head">
+            <span class="g-num">1</span>
+            <div>
+              <h2>Open Safari Settings</h2>
+              <p>In Safari, click <b>Safari</b> in the menu bar at the top of the screen, then <b>Settings…</b>. Shortcut: press <b>⌘ ,</b> (Command and comma).</p>
+              <label class="g-check"><input type="checkbox"> Done</label>
+            </div>
+          </div>
+          <div class="mock mock-menu" aria-hidden="true">
+            <div class="mock-menubar"><span></span><span>Safari</span><span>File</span><span>Edit</span><span>View</span><span>History</span></div>
+            <div class="mock-drop">
+              <div class="mock-row dim">About Safari</div>
+              <hr>
+              <div class="mock-row hot">Settings… <kbd>⌘ ,</kbd></div>
+              <div class="mock-row dim">Privacy Report</div>
+              <hr>
+              <div class="mock-row dim">Quit Safari <kbd>⌘ Q</kbd></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="g-step" id="advanced" data-need="yt">
+          <div class="g-head">
+            <span class="g-num">2</span>
+            <div>
+              <h2>Show developer features <span class="g-tag" data-only="yt">Needed</span><span class="g-tag opt" data-only="nntab">Only if NN Tab is missing</span></h2>
+              <p>Click the <b>Advanced</b> tab. At the bottom, tick <b>Show features for web developers</b>.</p>
+              <label class="g-check"><input type="checkbox"> Done</label>
+            </div>
+          </div>
+          <div class="mock" aria-hidden="true">
+            <div class="mock-bar"><i></i><i></i><i></i><b>Advanced</b></div>
+            <div class="mock-tabs"><span>General</span><span>Tabs</span><span>AutoFill</span><span>Passwords</span><span>Search</span><span>Security</span><span>Extensions</span><span class="on">Advanced</span></div>
+            <div class="mock-body">
+              <div class="mock-row dim"><span class="box"></span>Show full website address</div>
+              <div class="mock-row dim"><span class="box"></span>Press Tab to highlight each item on a webpage</div>
+              <div class="mock-row hot"><span class="box"></span>Show features for web developers</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="g-step" id="unsigned" data-need="yt">
+          <div class="g-head">
+            <span class="g-num">3</span>
+            <div>
+              <h2>Allow unsigned extensions <span class="g-tag" data-only="yt">Needed</span><span class="g-tag opt" data-only="nntab">Only if NN Tab is missing</span></h2>
+              <p>A new <b>Developer</b> tab appears. Click it and tick <b>Allow unsigned extensions</b>. Enter your Mac password when asked.</p>
+              <p class="g-alt">Older Safari? Use the <b>Develop</b> menu at the top of the screen → <b>Allow Unsigned Extensions</b>.</p>
+              <label class="g-check"><input type="checkbox"> Done</label>
+            </div>
+          </div>
+          <div class="mock" aria-hidden="true">
+            <div class="mock-bar"><i></i><i></i><i></i><b>Developer</b></div>
+            <div class="mock-tabs"><span>General</span><span>Tabs</span><span>Security</span><span>Extensions</span><span>Advanced</span><span class="on">Developer</span></div>
+            <div class="mock-body">
+              <div class="mock-row dim"><span class="box"></span>Disable local file restrictions</div>
+              <div class="mock-row dim"><span class="box"></span>Allow remote automation</div>
+              <div class="mock-row hot"><span class="box"></span>Allow unsigned extensions</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="g-step" id="extensions" data-need="yt nntab">
+          <div class="g-head">
+            <span class="g-num">4</span>
+            <div>
+              <h2>Turn on the extension</h2>
+              <p>Click the <b>Extensions</b> tab. In the list on the left, tick the box next to <b class="ext-name">YT Premium Vibe</b>.</p>
+              <label class="g-check"><input type="checkbox"> Done</label>
+            </div>
+          </div>
+          <div class="mock" aria-hidden="true">
+            <div class="mock-bar"><i></i><i></i><i></i><b>Extensions</b></div>
+            <div class="mock-tabs"><span>General</span><span>Tabs</span><span>Security</span><span class="on">Extensions</span><span>Advanced</span><span>Developer</span></div>
+            <div class="mock-split">
+              <div class="mock-list">
+                <div class="mock-row dim"><span class="box"></span><span class="ext"></span>Other extension</div>
+                <div class="mock-row hot"><span class="box"></span><span class="ext"><img class="ext-logo" src="../../projects/yt-premium-vibe/logo.png" alt=""></span><span class="ext-name">YT Premium Vibe</span></div>
+              </div>
+              <div class="mock-detail"><strong class="ext-name">YT Premium Vibe</strong>Permissions, website access and options appear here.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="g-step" id="websites" data-need="yt nntab">
+          <div class="g-head">
+            <span class="g-num">5</span>
+            <div>
+              <h2>Allow it on websites</h2>
+              <p data-only="yt">Close Settings and open <b>youtube.com</b>. Click the <b>YT Premium Vibe</b> icon next to the address bar and choose <b>Always Allow on This Website</b>. Reload the page.</p>
+              <p data-only="nntab">Click the <b>NN Tab</b> icon in the Safari toolbar and choose <b>Always Allow on Every Website</b>. NN Tab needs this to show bookmark icons.</p>
+              <label class="g-check"><input type="checkbox"> Done</label>
+            </div>
+          </div>
+          <div class="mock" aria-hidden="true">
+            <div class="mock-toolbar">
+              <span class="mock-url" data-only="yt">youtube.com</span><span class="mock-url" data-only="nntab">Start Page</span>
+              <span class="mock-icon hot"><img class="ext-logo" src="../../projects/yt-premium-vibe/logo.png" alt=""></span>
+            </div>
+            <div class="mock-pop">
+              <span>Allow “<span class="ext-name">YT Premium Vibe</span>” to access this page?</span>
+              <div class="mock-row dim">Allow for One Day</div>
+              <div class="mock-row hot" data-only="yt">Always Allow on This Website</div>
+              <div class="mock-row hot" data-only="nntab">Always Allow on Every Website</div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="g-done" id="allDone">🎉 All set. Go back and enjoy your extension.</div>
+
+      <div class="g-box" id="restart">
+        <strong>Restarted Safari and the extension disappeared?</strong>
+        <p data-only="yt">That’s normal. Safari switches off “Allow unsigned extensions” every time you quit it (⌘Q). Do step 3 again. It takes 10 seconds, and your settings are kept.</p>
+        <p data-only="nntab">If NN Tab ever disappears from the Extensions list, do steps 2 and 3, then run NN Tab’s build command again.</p>
+      </div>
+    </section>
+
+    <section class="container g-help" id="help">
+      <h2>Still stuck?</h2>
+      <div><strong>The extension isn’t in the Extensions list</strong><p>Open the extension’s app from your Applications folder once, then check step 3.</p></div>
+      <div><strong>I can’t find the Developer tab</strong><p>Do step 2 first. The Developer tab only appears after “Show features for web developers” is ticked.</p></div>
+      <div><strong>Nothing changed on the website</strong><p>Reload the page after step 5. You can check access anytime in Safari → Settings → Websites → Extensions.</p></div>
+      <div><strong>Need a hand?</strong><p>Message me on <a href="https://wa.me/917022232721" target="_blank" rel="noopener"><strong style="display:inline">WhatsApp</strong></a>.</p></div>
+    </section>
+
+    <footer class="container nt-foot">
+      <p>© <span id="year">2026</span> Sandip Pal</p>
+      <a href="../../#series">← Back to Project</a>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      const params = new URLSearchParams(location.search);
+      if (params.get("embed") === "1") document.body.classList.add("embed");
+
+      const NAMES = { yt: "YT Premium Vibe", nntab: "NN Tab" };
+      const LOGOS = { yt: "../../projects/yt-premium-vibe/logo.png", nntab: "../../projects/nn-tab/logo.png" };
+      const store = {
+        get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+        set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+      };
+      let project = params.get("for") || store.get("sg-for") || "yt";
+      if (!NAMES[project]) project = "yt";
+
+      const steps = [...document.querySelectorAll(".g-step")];
+
+      function applyProject() {
+        store.set("sg-for", project);
+        document.querySelectorAll(".g-pick button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.for === project)));
+        document.querySelectorAll("[data-only]").forEach(el => { el.hidden = el.dataset.only !== project; });
+        document.querySelectorAll(".ext-name").forEach(el => { el.textContent = NAMES[project]; });
+        document.querySelectorAll(".ext-logo").forEach(el => { el.src = LOGOS[project]; });
+        steps.forEach(s => s.classList.toggle("skip", !s.dataset.need.split(" ").includes(project)));
+        restoreChecks();
+      }
+
+      function key() { return `sg-done-${project}`; }
+      function restoreChecks() {
+        const done = store.get(key()) || [];
+        steps.forEach(s => {
+          const on = done.includes(s.id);
+          s.querySelector(".g-check input").checked = on;
+          s.classList.toggle("done", on);
+        });
+        updateProgress();
+      }
+      function updateProgress() {
+        const needed = steps.filter(s => !s.classList.contains("skip"));
+        const done = needed.filter(s => s.classList.contains("done")).length;
+        document.getElementById("bar").style.width = `${(done / needed.length) * 100}%`;
+        document.getElementById("count").textContent = `${done} of ${needed.length} done`;
+        document.getElementById("allDone").classList.toggle("show", done === needed.length);
+      }
+
+      steps.forEach(s => {
+        s.querySelector(".g-check input").addEventListener("change", e => {
+          s.classList.toggle("done", e.target.checked);
+          const done = new Set(store.get(key()) || []);
+          e.target.checked ? done.add(s.id) : done.delete(s.id);
+          store.set(key(), [...done]);
+          updateProgress();
+        });
+      });
+      document.querySelectorAll(".g-pick button").forEach(b => b.addEventListener("click", () => { project = b.dataset.for; applyProject(); }));
+
+      applyProject();
+
+      // Coming from a "Show me how" link: highlight that step
+      const target = location.hash && document.querySelector(location.hash);
+      if (target && target.classList.contains("g-step")) {
+        setTimeout(() => { target.scrollIntoView({ behavior: "smooth", block: "start" }); target.classList.add("flash"); }, 150);
+      }
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const header = document.querySelector(".site-header");
+      addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 8), { passive: true });
+    })();
+  </script>
+</body>
+
+</html>

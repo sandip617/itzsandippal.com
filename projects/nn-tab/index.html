@@ -147,9 +147,9 @@
             <div class="cmd"><code>security find-certificate -c "Apple Development" -p | openssl x509 -noout -subject</code></div></div></li>
           <li><div><strong>Build &amp; install the app</strong><span>Paste this in Terminal, replacing YOURTEAMID with your code. It builds NN Tab, puts it in your Applications folder and opens it. Wait for “✓ Installed”.</span>
             <div class="cmd"><code>cd ~/Downloads/Safari-New_Tab_Extension-main &amp;&amp; TEAM_ID=YOURTEAMID zsh scripts/build-safari.sh</code></div></div></li>
-          <li><div><strong>Turn it on in Safari</strong><span>Safari → Settings → Extensions → tick NN Tab.</span></div></li>
+          <li><div><strong>Turn it on in Safari</strong><span>Safari → Settings → Extensions → tick NN Tab.</span><a class="howto" href="../../guides/safari-extensions/?for=nntab#extensions">Show me how →</a></div></li>
           <li><div><strong>Make it your new tab</strong><span>Safari → Settings → General → set “New windows open with” and “New tabs open with” to NN Tab.</span></div></li>
-          <li><div><strong>Allow bookmark icons</strong><span>Click the NN Tab button in the Safari toolbar → Allow on all websites. NN Tab needs this to fetch website icons.</span></div></li>
+          <li><div><strong>Allow bookmark icons</strong><span>Click the NN Tab button in the Safari toolbar → Allow on all websites. NN Tab needs this to fetch website icons.</span><a class="howto" href="../../guides/safari-extensions/?for=nntab#websites">Show me how →</a></div></li>
         </ol>
       </div>
     </section>
@@ -216,6 +216,7 @@
     const header = document.querySelector(".site-header");
     addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 8), { passive: true });
   </script>
+  <script src="../../guides/drawer.js"></script>
 </body>
 
 </html>

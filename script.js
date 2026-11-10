@@ -237,6 +237,7 @@ const playbooks = {
         thumb: "news"
       }
     ],
+    help: { text: "Installing a Safari extension?", link: "Step-by-step setup guide →", href: "guides/safari-extensions/" },
     steps: [
       ["Content pillars", "Three or four themes the brand can own."],
       ["Format design", "Templates, tone of voice and a look people recognise."],
@@ -267,7 +268,7 @@ const workThumbs = {
 };
 
 /* Builds the "Live project" cards shown inside a playbook */
-function renderWork(list) {
+function renderWork(list, help) {
   if (!modalWork) return;
   modalWork.hidden = !list || !list.length;
   if (modalWork.hidden) { modalWork.replaceChildren(); return; }
@@ -324,7 +325,18 @@ function renderWork(list) {
     card.append(thumb, info);
     return card;
   });
-  modalWork.replaceChildren(label, ...cards);
+  // Optional help line under the cards (e.g. the Safari setup guide)
+  const extra = [];
+  if (help) {
+    const line = document.createElement("p");
+    line.className = "work-help";
+    const a = document.createElement("a");
+    a.href = help.href;
+    a.textContent = help.link;
+    line.append(`${help.text} `, a);
+    extra.push(line);
+  }
+  modalWork.replaceChildren(label, ...cards, ...extra);
 }
 const modalClose = document.getElementById("modalClose");
 let lastFocus = null;
@@ -335,7 +347,7 @@ function openModal(key) {
   modalType.textContent = `Playbook · ${p.type}`;
   modalTitle.textContent = p.title;
   modalText.textContent = p.text;
-  renderWork(p.work);
+  renderWork(p.work, p.help);
   modalSteps.replaceChildren(...p.steps.map(([title, desc]) => {
     const li = document.createElement("li");
     const wrap = document.createElement("div");

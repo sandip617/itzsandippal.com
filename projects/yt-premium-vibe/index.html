@@ -154,11 +154,12 @@
           <li><div><strong>Open it once</strong><span>Double-click the app in Applications. macOS will say it can’t verify the app, because it isn’t sold through the App Store. Click <b>Done</b>. Then open <b>System Settings → Privacy &amp; Security</b>, scroll down, and click <b>Open Anyway</b> next to “YT Premium Vibe was blocked”. Enter your Mac password and click <b>Open</b>. A small window appears. You can close it.</span>
             <div class="note">Prefer Terminal? Paste this, press Enter, then open the app:</div>
             <div class="cmd"><code>xattr -dr com.apple.quarantine "/Applications/YT Premium Vibe.app"</code></div></div></li>
-          <li><div><strong>Show Safari’s developer settings</strong><span>Safari → <b>Settings → Advanced</b> → tick <b>Show features for web developers</b>.</span></div></li>
+          <li><div><strong>Show Safari’s developer settings</strong><span>Safari → <b>Settings → Advanced</b> → tick <b>Show features for web developers</b>.</span><a class="howto" href="../../guides/safari-extensions/?for=yt#advanced">Show me how →</a></div></li>
           <li><div><strong>Allow the extension</strong><span>Safari → <b>Settings → Developer</b> → tick <b>Allow unsigned extensions</b> and enter your password.</span>
+            <a class="howto" href="../../guides/safari-extensions/?for=yt#unsigned">Show me how →</a>
             <div class="note">Safari switches this off every time you quit Safari (⌘Q). After a restart, tick it again. Your settings stay saved.</div></div></li>
-          <li><div><strong>Turn it on</strong><span>Safari → <b>Settings → Extensions</b> → tick <b>YT Premium Vibe</b>.</span></div></li>
-          <li><div><strong>Allow it on YouTube</strong><span>Open <b>youtube.com</b>, click the new YT Premium Vibe icon next to the address bar, and choose <b>Always Allow on This Website</b>. Reload the page. You’ll now see <b>AI Summary</b> and <b>Download</b> above the Like button.</span></div></li>
+          <li><div><strong>Turn it on</strong><span>Safari → <b>Settings → Extensions</b> → tick <b>YT Premium Vibe</b>.</span><a class="howto" href="../../guides/safari-extensions/?for=yt#extensions">Show me how →</a></div></li>
+          <li><div><strong>Allow it on YouTube</strong><span>Open <b>youtube.com</b>, click the new YT Premium Vibe icon next to the address bar, and choose <b>Always Allow on This Website</b>. Reload the page. You’ll now see <b>AI Summary</b> and <b>Download</b> above the Like button.</span><a class="howto" href="../../guides/safari-extensions/?for=yt#websites">Show me how →</a></div></li>
         </ol>
       </div>
     </section>
@@ -248,6 +249,7 @@
     const header = document.querySelector(".site-header");
     addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 8), { passive: true });
   </script>
+  <script src="../../guides/drawer.js"></script>
 </body>
 
 </html>
