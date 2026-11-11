@@ -104,6 +104,23 @@
     .g-done { display: none; margin: 18px 0 0; padding: 18px 20px; border-radius: 16px; background: #e8f9ee; border: 1px solid #a7e3bd; font-weight: 700; }
     .g-done.show { display: block; }
 
+    .g-stay { margin: 36px 0 0; padding: 26px 24px; border-radius: var(--radius, 22px); background: var(--card); border: 1px solid var(--line); scroll-margin-top: 130px; }
+    .g-stay h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); letter-spacing: -.04em; line-height: 1.05; margin-bottom: 8px; }
+    .g-stay h2 em { color: var(--blue); }
+    .g-stay > p { color: var(--muted); max-width: 680px; }
+    .g-stay ol { list-style: none; counter-reset: st; display: grid; gap: 12px; margin: 22px 0 0; padding: 0; max-width: 780px; }
+    .g-stay li { counter-increment: st; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding: 14px; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); }
+    .g-stay li::before { content: counter(st); display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #fff; font-weight: 800; font-size: .9rem; }
+    .g-stay li strong { display: block; margin-bottom: 2px; }
+    .g-stay li span { color: var(--muted); font-size: .95rem; }
+    .g-stay li span b { color: var(--ink); }
+    .g-stay .btn { margin-top: 10px; }
+    .g-win { margin-top: 18px; padding: 14px 16px; border-radius: 14px; background: #e8f9ee; border: 1px solid #a7e3bd; font-weight: 600; max-width: 780px; }
+    .cmd { display: flex; gap: 8px; align-items: stretch; margin-top: 10px; }
+    .cmd code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; padding: 10px 12px; border-radius: 10px; background: var(--ink); color: var(--paper); font: .82rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .copy-btn { flex: none; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: .82rem; font-weight: 700; cursor: pointer; }
+    .copy-btn:hover { background: var(--ink); color: var(--paper); }
+    .g-box a { font-weight: 700; color: #6b5a22; text-decoration: underline; text-underline-offset: 3px; }
     .g-help { display: grid; gap: 12px; padding: 36px 0 20px; max-width: 780px; }
     .g-help h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); letter-spacing: -.04em; margin-bottom: 4px; }
     .g-help div { padding: 16px 18px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
@@ -122,6 +139,7 @@
     body.embed .g-hero .lead { font-size: .95rem; }
     body.embed .g-progress { top: 0; }
     body.embed .g-step { grid-template-columns: 1fr; padding: 18px; }
+    body.embed .g-stay { padding: 20px 16px; }
     body.embed .container { width: min(100% - 32px, 1200px); }
   </style>
 </head>
@@ -273,8 +291,31 @@
 
       <div class="g-box" id="restart">
         <strong>Restarted Safari and the extension disappeared?</strong>
-        <p data-only="yt">That’s normal. Safari switches off “Allow unsigned extensions” every time you quit it (⌘Q). Do step 3 again. It takes 10 seconds, and your settings are kept.</p>
+        <p data-only="yt">That’s normal. Safari switches off “Allow unsigned extensions” every time you quit it (⌘Q) or restart your Mac. Do step 3 again: it takes 10 seconds, and your settings are kept. Or <a href="#stay-on">sign it once so it stays on for good</a>.</p>
         <p data-only="nntab">If NN Tab ever disappears from the Extensions list, do steps 2 and 3, then run NN Tab’s build command again.</p>
+      </div>
+
+      <div class="g-stay" id="stay-on">
+        <p class="eyebrow">Optional · free · about 15 minutes</p>
+        <h2>Keep it on after a <em>restart</em></h2>
+        <div data-only="yt">
+          <p>Safari switches off unsigned extensions whenever it quits. Sign YT Premium Vibe once with your own free Apple ID and Safari treats it as signed: it stays on after every restart, and you never need “Allow unsigned extensions” again.</p>
+          <ol>
+            <li><div><strong>Install Xcode</strong><span>Get <b>Xcode</b> free from the Mac App Store. Open it once and let it finish installing its extra parts.</span></div></li>
+            <li><div><strong>Sign in and create a certificate</strong><span>Xcode → <b>Settings → Accounts</b> → <b>+</b> → Apple ID. A free Apple ID is enough. Select your team, click <b>Manage Certificates</b>, then <b>+ → Apple Development</b>.</span></div></li>
+            <li><div><strong>Point Terminal to Xcode</strong><span>Open <b>Terminal</b> (⌘ + Space, type Terminal), paste this, and enter your Mac password:</span>
+              <div class="cmd"><code>sudo xcode-select -s /Applications/Xcode.app</code></div></div></li>
+            <li><div><strong>Download the source code</strong><span>Click the button, then double-click the file in Downloads to unzip it. You get a folder called <b>YT-Premium-Vibe-Extension-main</b>.</span>
+              <a class="btn btn-primary" href="https://github.com/sandip617/YT-Premium-Vibe-Extension/archive/refs/heads/main.zip">Download source ZIP ↓</a></div></li>
+            <li><div><strong>Build &amp; install the signed app</strong><span>Paste this in Terminal. It signs the app with your certificate, replaces the old one in Applications and opens it. Wait for <b>“✓ Installed”</b> (a few minutes the first time).</span>
+              <div class="cmd"><code>cd ~/Downloads/YT-Premium-Vibe-Extension-main &amp;&amp; bash install-on-my-mac.sh</code></div></div></li>
+            <li><div><strong>Turn it on one last time</strong><span>Safari sees the signed app as new. Do <a href="#extensions"><b>step 4</b></a> (tick it in Extensions) and <a href="#websites"><b>step 5</b></a> (allow youtube.com) again. Then you can untick “Allow unsigned extensions”.</span></div></li>
+          </ol>
+          <div class="g-win">✓ Done. Restart your Mac as often as you like. YT Premium Vibe stays on.</div>
+        </div>
+        <div data-only="nntab">
+          <p>Nothing to do. NN Tab is already signed with your own Apple ID when you build it with its install command, so Safari keeps it on after every restart.</p>
+        </div>
       </div>
     </section>
 
@@ -351,9 +392,21 @@
 
       // Coming from a "Show me how" link: highlight that step
       const target = location.hash && document.querySelector(location.hash);
-      if (target && target.classList.contains("g-step")) {
+      if (target && (target.classList.contains("g-step") || target.id === "stay-on")) {
         setTimeout(() => { target.scrollIntoView({ behavior: "smooth", block: "start" }); target.classList.add("flash"); }, 150);
       }
+
+      // Copy buttons for the Terminal commands
+      document.querySelectorAll(".cmd").forEach(box => {
+        const btn = document.createElement("button");
+        btn.type = "button"; btn.className = "copy-btn"; btn.textContent = "Copy";
+        btn.addEventListener("click", async () => {
+          try { await navigator.clipboard.writeText(box.querySelector("code").textContent); btn.textContent = "Copied ✓"; }
+          catch { btn.textContent = "Select & copy"; }
+          setTimeout(() => { btn.textContent = "Copy"; }, 1800);
+        });
+        box.append(btn);
+      });
 
       document.getElementById("year").textContent = new Date().getFullYear();
       const header = document.querySelector(".site-header");
