@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Sandip's Board · News Board</title>
+  <meta name="description" content="বিজনেস স্টুডেন্টের প্রতিদিনের খবর, ব্যাখ্যা আর প্রস্তুতি। প্রতিদিন সকাল ৭টায় নতুন সংস্করণ।">
+  <link rel="canonical" href="https://itzsandippal.com/newsboard/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sandip's Board · News Board">
+  <meta property="og:description" content="A new edition every morning at 7 AM: business news, explainers and prep for BBA students.">
+  <meta property="og:url" content="https://itzsandippal.com/newsboard/">
+  <link rel="icon" href="/logo.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>body{margin:0;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Hind Siliguri",sans-serif;display:grid;place-items:center;min-height:100vh;color:#555}</style>
+</head>
+<body>
+  <p id="msg">আজকের সংস্করণ খোলা হচ্ছে…</p>
+  <noscript><a href="https://sandip617.github.io/news-board/?stay">News Board খুলুন</a></noscript>
+  <script>
+    // News Board lives in the sandip617/news-board repo (GitHub Pages).
+    // This page loads that board live so it always shows the latest version and edition,
+    // while the address stays itzsandippal.com/newsboard.
+    (function () {
+      var SRC = "https://sandip617.github.io/news-board/";
+      fetch(SRC + "index.html", { cache: "no-cache" })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(function (html) { document.open(); document.write(html); document.close(); })
+        .catch(function () { location.replace(SRC + "?stay" + location.hash); });
+    })();
+  </script>
+</body>
+</html>
