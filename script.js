@@ -230,7 +230,7 @@ const playbooks = {
         type: "Daily Newspaper · Bangla & English",
         title: "News Board",
         desc: "A daily business newspaper for BBA students that updates itself every morning at 7 AM. Global news with a \"why it matters\" note, an AI-written blog, term of the day, GD topic, quiz, weekly case study and market snapshot. Free and open source, with a guide to run your own.",
-        url: "https://sandip617.github.io/news-board/",
+        url: "https://itzsandippal.com/newsboard/",
         code: "https://github.com/sandip617/news-board",
         page: "projects/news-board/",
         cta: "See how it works →",
