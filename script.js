@@ -219,9 +219,9 @@ const playbooks = {
         thumb: "newtab"
       },
       {
-        type: "Browser Extension · Safari for Mac",
+        type: "Browser Extension · Safari & Chrome",
         title: "YT Premium Vibe",
-        desc: "Makes YouTube feel premium in Safari. Blocks ads, skips sponsors, hides Shorts, summarises any video with AI in English or Bangla, downloads video or audio and boosts volume up to 300%. Eleven features in one extension, each one switchable.",
+        desc: "Makes YouTube feel premium in Safari or Chrome. Blocks ads, skips sponsors, hides Shorts, summarises any video with AI in English or Bangla, downloads video or audio and boosts volume up to 300%. Eleven features in one extension, each one switchable.",
         code: "https://github.com/sandip617/YT-Premium-Vibe-Extension",
         page: "projects/yt-premium-vibe/",
         thumb: "ytvibe"
