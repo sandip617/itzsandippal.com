@@ -63,6 +63,7 @@
     .nt-section h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); letter-spacing: -.04em; line-height: 1.05; margin-bottom: 12px; }
     .nt-section h2 em { color: var(--blue); }
     .nt-section > .container > p.sub { color: var(--muted); max-width: 640px; margin-bottom: 28px; }
+    .nt-section h3.yv-sub { font-size: clamp(1.4rem, 2.6vw, 1.8rem); letter-spacing: -.03em; line-height: 1.1; margin: 48px 0 10px; scroll-margin-top: 90px; }
     .nt-section .modal-steps { max-width: 780px; margin-bottom: 0; }
     .nt-section .modal-steps li { font-size: .97rem; padding: 14px; }
     .nt-section .modal-steps li { grid-template-columns: 34px minmax(0, 1fr); }
@@ -180,6 +181,7 @@
           <li><div><strong>Load the folder</strong><span>Click <b>Load unpacked</b> and choose the <b>YT-Premium-Vibe-for-Chrome</b> folder. You should see <b>manifest.json</b> inside it.</span>
             <div class="note">“Manifest file is missing” means you picked the wrong folder. Pick the one that has manifest.json directly inside.</div></div></li>
           <li><div><strong>Pin it and open YouTube</strong><span>Click the puzzle icon next to the address bar and pin <b>YT Premium Vibe</b>. Open <b>youtube.com</b> (reload it if it was open). You’ll now see <b>AI Summary</b> and <b>Download</b> above the Like button.</span></div></li>
+          <li><div><strong>Turn on one-click Download (Windows)</strong><span>Double-click <b>INSTALL-DOWNLOAD-HELPER.bat</b> in the same folder once, then restart Chrome. <a href="#chrome-download">Full steps ↓</a></span></div></li>
           <li><div><strong>Updating later</strong><span>Download the new zip, unzip it, replace the files in your old folder, then click the ↻ reload icon on YT Premium Vibe in chrome://extensions.</span></div></li>
         </ol>
       </div>
@@ -203,13 +205,24 @@
         <p class="eyebrow">One-time setup</p>
         <h2>Download <em>videos</em></h2>
         <p class="sub">Click <b>Download</b> above the Like button and choose <b>Best quality video</b> or <b>Audio only</b>. Files go to your Downloads folder.</p>
-        <p class="sub"><b>On Chrome:</b> one-click download needs the Mac app, so it works only in the Safari version. In Chrome, the Download button offers <b>Copy yt-dlp command</b> instead, which you can run in a terminal if you have <a href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener">yt-dlp</a> installed. The steps below are for Safari.</p>
+        <p class="sub">On Safari, follow the steps right below. On Chrome for Windows, see <a href="#chrome-download"><b>Chrome on Windows</b></a> further down.</p>
         <ol class="modal-steps">
           <li><div><strong>First download</strong><span>The first time, the extension sets up its downloader by itself. This takes a few seconds. You’ll see the progress on the button, then “Done ✓” with a <b>Show in Finder</b> button.</span></div></li>
           <li><div><strong>If you see “One-time setup”</strong><span>Some Macs need one extra tool. Click <b>Copy setup command</b> in that message, open <b>Terminal</b> (⌘ + Space, type Terminal), paste, and press Enter. It may ask for your password and take a few minutes. Then click Download again. This is the same command:</span>
             <div class="cmd"><code>command -v brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"; brew install yt-dlp ffmpeg</code></div></div></li>
           <li><div><strong>Change the folder</strong><span>Click the toolbar icon → <b>Download</b> → ⌄ and type another folder, for example <b>~/Movies/YouTube</b>.</span></div></li>
         </ol>
+
+        <h3 id="chrome-download" class="yv-sub">Chrome on Windows</h3>
+        <p class="sub">A one-time setup adds a small download helper. No admin rights needed. Works in Chrome, Edge and Brave.</p>
+        <ol class="modal-steps">
+          <li><div><strong>Run the installer</strong><span>Open your <b>YT-Premium-Vibe-for-Chrome</b> folder and double-click <b>INSTALL-DOWNLOAD-HELPER.bat</b>.</span>
+            <div class="note">If Windows says “Windows protected your PC”, click <b>More info</b> → <b>Run anyway</b>.</div></div></li>
+          <li><div><strong>Wait for “Done!”</strong><span>It downloads the downloader (yt-dlp) and ffmpeg, which takes a few minutes. When it says <b>Done!</b>, press any key to close the window.</span></div></li>
+          <li><div><strong>Restart Chrome</strong><span>Close every Chrome window, then open Chrome again.</span></div></li>
+          <li><div><strong>Download</strong><span>Click <b>Download</b> above the Like button. You’ll see the progress on the button, then “Done ✓” with a <b>Show in folder</b> button. Files go to your Downloads folder.</span></div></li>
+        </ol>
+        <p class="sub">Chrome on a Mac or Linux: one-click download isn’t available there. The Download button offers <b>Copy yt-dlp command</b> instead. On a Mac, the Safari version downloads in one click.</p>
       </div>
     </section>
 
@@ -223,7 +236,7 @@
           <div><strong>Sponsor Skip</strong><p>Jumps over sponsor segments using SponsorBlock, with an Undo button.</p></div>
           <div><strong>Hide Shorts</strong><p>Removes Shorts from home, search, the sidebar and subscriptions.</p></div>
           <div><strong>AI Summary</strong><p>Chapter-by-chapter study notes in English or Bangla, plus a chat for follow-up questions.</p></div>
-          <div><strong>Download</strong><p>Best-quality video or audio only, saved straight to your Mac (Safari version).</p></div>
+          <div><strong>Download</strong><p>Best-quality video or audio only, saved straight to your computer (Safari on Mac, Chrome on Windows).</p></div>
           <div><strong>Custom Speed</strong><p>S = slower, D = faster, R = normal. From 0.25× to 4×, remembered per channel.</p></div>
           <div><strong>Smart Quality</strong><p>Highest quality in fullscreen, 720p in normal view, switching automatically.</p></div>
           <div><strong>Volume Boost</strong><p>Up to 300% louder with a slider in the player, without distortion.</p></div>
@@ -244,6 +257,7 @@
             <a class="howto" href="../../guides/safari-extensions/?for=yt#stay-on">Show me how →</a></div>
           <div><strong>No buttons on YouTube</strong><p>Safari → Settings → Websites → Extensions → YT Premium Vibe → set youtube.com to <b>Allow</b>, then reload YouTube.</p></div>
           <div><strong>Chrome says “Manifest file is missing”</strong><p>In <b>Load unpacked</b>, pick the folder that has <b>manifest.json</b> directly inside it, not the folder around it.</p></div>
+          <div><strong>Chrome: “The download helper isn’t installed”</strong><p>Run <b>INSTALL-DOWNLOAD-HELPER.bat</b> from your extension folder, then close and reopen Chrome. If you loaded the extension before this update, remove it in chrome://extensions and load the new folder again.</p></div>
           <div><strong>A video won’t play</strong><p>If you also use another ad blocker (like uBlock), turn one of them off. Or open the toolbar icon → Ad Blocker → turn off “Remove ads from player data”.</p></div>
           <div><strong>Still stuck?</strong><p>Message me on <a href="https://wa.me/917022232721" target="_blank" rel="noopener"><strong style="display:inline">WhatsApp</strong></a> or open an issue on <a href="https://github.com/sandip617/YT-Premium-Vibe-Extension/issues" target="_blank" rel="noopener"><strong style="display:inline">GitHub</strong></a>.</p></div>
         </div>
