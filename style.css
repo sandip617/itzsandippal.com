@@ -706,6 +706,9 @@ h2 em { letter-spacing: -.02em; color: var(--blue); }
 .work-thumb-news .nb-cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; width: min(240px, 100%); }
 .work-thumb-news .nb-cols i { height: 22px; background: repeating-linear-gradient(#1b1814 0 2px, transparent 2px 6px); opacity: .22; }
 .work-thumb-news .nb-cols i:first-child { opacity: .4; }
+.work-thumb-sb { background: radial-gradient(ellipse 60% 10% at 50% 46%, rgba(255, 205, 110, .55), transparent 70%), radial-gradient(circle at 50% 46%, rgba(246, 180, 70, .18), transparent 55%), #05040a; align-content: center; justify-items: center; gap: 10px; }
+.work-thumb-sb .sb-hole { width: 64px; height: 64px; border-radius: 50%; background: #000; box-shadow: 0 0 0 3px #f3c25a, 0 0 22px 6px rgba(243, 194, 90, .55), inset 0 0 12px rgba(0, 0, 0, 1); }
+.work-thumb-sb .sb-word { font-family: var(--sans); font-size: .72rem; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: #f3c25a; text-shadow: none; }
 .work-help { margin-top: 6px; padding: 14px 18px; border-radius: 14px; border: 1px dashed var(--line); color: var(--muted); font-size: .93rem; }
 .work-help a { font-weight: 700; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 .work-help a:hover { color: var(--blue); }

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J8QLRPFXB0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-J8QLRPFXB0');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Assistant — Bangla Voice Assistant for Mac · Sandip Pal</title>
+  <meta name="description"
+    content="SB Assistant is a personal Bangla voice assistant for macOS by Sandip Pal. Study planning, quizzes, Mac and Safari control, with safety checks built into the code. Free and open source.">
+  <meta name="author" content="Sandip Pal">
+  <meta name="theme-color" content="#f5f2ec">
+  <link rel="canonical" href="https://itzsandippal.com/projects/sb-assistant/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sandip Pal">
+  <meta property="og:title" content="SB Assistant — a Bangla voice assistant for your Mac">
+  <meta property="og:description" content="Study help, Mac and Safari control, and nothing sent or deleted without your yes. Free and open source.">
+  <meta property="og:url" content="https://itzsandippal.com/projects/sb-assistant/">
+
+  <link rel="icon" type="image/svg+xml" href="../../logo.svg">
+  <link rel="icon" type="image/png" href="../../logo.png">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .nt-back { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: .9rem; white-space: nowrap; transition: background .25s, color .25s; }
+    .nt-back:hover { background: var(--ink); color: var(--paper); }
+
+    .nt-hero { padding: 56px 0 40px; display: grid; gap: 40px; align-items: center; }
+    .nt-hero h1 { font-size: clamp(2.8rem, 7vw, 5rem); line-height: .95; letter-spacing: -.05em; margin-bottom: 18px; }
+    .nt-hero h1 em { color: var(--blue); }
+    .nt-hero .lead { color: var(--muted); font-size: 1.08rem; max-width: 520px; margin-bottom: 26px; }
+    .nt-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .nt-meta { margin-top: 16px; font-size: .88rem; color: var(--muted); }
+
+    /* The app's gold black hole, drawn in CSS so no screenshot of anyone's data is needed */
+    .sb-art { position: relative; aspect-ratio: 16 / 10; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 60px -30px rgba(17, 16, 20, .45);
+      background: radial-gradient(ellipse 62% 9% at 50% 47%, rgba(255, 210, 120, .7), transparent 70%), radial-gradient(circle at 50% 47%, rgba(246, 180, 70, .22), transparent 50%), #05040a; display: grid; place-items: center; }
+    .sb-art .ring { width: 34%; aspect-ratio: 1; border-radius: 50%; background: #000; box-shadow: 0 0 0 4px #f3c25a, 0 0 46px 14px rgba(243, 194, 90, .5), inset 0 0 26px #000; position: relative; }
+    .sb-art .ring::after { content: ""; position: absolute; inset: -14%; border-radius: 50%; background: conic-gradient(from 0deg, transparent, rgba(255, 214, 130, .55), transparent 35%, transparent 60%, rgba(255, 214, 130, .35), transparent); filter: blur(6px); animation: sbspin 14s linear infinite; }
+    .sb-art .word { position: absolute; bottom: 9%; font: 800 .8rem/1 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: #f3c25a; }
+    .sb-art .clock { position: absolute; top: 8%; left: 6%; font: 300 1.6rem/1 var(--sans); color: rgba(255, 236, 200, .85); letter-spacing: .02em; }
+    @keyframes sbspin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .sb-art .ring::after { animation: none; } }
+
+    .nt-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    .nt-jump a { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: .88rem; }
+    .nt-jump a:hover { background: var(--ink); color: var(--paper); }
+
+    .nt-section { padding: 56px 0; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
+    .nt-section h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); letter-spacing: -.04em; line-height: 1.05; margin-bottom: 12px; }
+    .nt-section h2 em { color: var(--blue); }
+    .nt-section > .container > p.sub { color: var(--muted); max-width: 640px; margin-bottom: 28px; }
+    .nt-section .modal-steps { max-width: 780px; margin-bottom: 0; }
+    .nt-section .modal-steps li { font-size: .97rem; padding: 14px; }
+    .nt-section .modal-steps li { grid-template-columns: 34px minmax(0, 1fr); }
+    .nt-section .modal-steps li > div, .nt-hero > *, .nt-help > div { min-width: 0; }
+
+    .cmd { display: flex; gap: 8px; align-items: stretch; margin-top: 10px; }
+    .cmd code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; padding: 10px 12px; border-radius: 10px; background: var(--ink); color: var(--paper); font: .82rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .copy-btn { flex: none; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: .82rem; font-weight: 700; cursor: pointer; }
+    .copy-btn:hover { background: var(--ink); color: var(--paper); }
+
+    .sb-grid { display: grid; gap: 14px; }
+    .sb-grid div { padding: 18px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); }
+    .sb-grid strong { display: block; font-size: 1.05rem; letter-spacing: -.01em; margin-bottom: 4px; }
+    .sb-grid p { color: var(--muted); font-size: .95rem; }
+    .sb-say { display: inline-block; margin-top: 8px; font-size: .85rem; font-weight: 700; color: var(--ink); background: var(--paper-2); border-radius: 999px; padding: 4px 12px; }
+
+    .nt-help { display: grid; gap: 12px; max-width: 780px; }
+    .nt-help div { padding: 16px 18px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+    .nt-help strong { display: block; margin-bottom: 4px; }
+    .nt-help p { color: var(--muted); font-size: .95rem; }
+
+    .nt-foot { padding: 34px 0 60px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; color: var(--muted); font-size: .9rem; }
+    .nt-foot a { font-weight: 700; color: var(--ink); }
+    .nt-foot a:hover { color: var(--blue); }
+
+    @media (min-width: 900px) {
+      .nt-hero { grid-template-columns: 5fr 7fr; padding: 72px 0 56px; }
+      .sb-grid { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    @media (min-width: 600px) and (max-width: 899px) { .sb-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) {
+      .nt-hero { padding: 32px 0 32px; }
+      .nt-section { padding: 44px 0; }
+      .btn { padding: 13px 22px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header" id="top">
+    <nav class="nav container">
+      <a class="brand" href="../../" aria-label="Sandip Pal home">
+        <img class="brand-mark" src="../../logo.svg" alt="" width="40" height="40">
+        <span class="brand-name">Sandip Pal</span>
+      </a>
+      <a class="nt-back" href="../../#series">← Back to Project</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="container nt-hero">
+      <div>
+        <p class="eyebrow">Mac app · Bangla voice assistant</p>
+        <h1>SB <em>Assistant</em></h1>
+        <p class="lead">A personal voice assistant that speaks Bangla and runs only on your own Mac. It plans your exam
+          study, quizzes you from your notes, reminds you of Classroom deadlines, controls the Mac and works in
+          Safari. Anything that sends, posts or deletes waits for your “yes”. Free and open source.</p>
+        <div class="nt-actions">
+          <a class="btn btn-primary" href="https://github.com/sandip617/SB-Assistant/archive/refs/heads/main.zip">Download ZIP ↓</a>
+          <a class="btn btn-ghost" href="https://github.com/sandip617/SB-Assistant" target="_blank" rel="noopener">View code ↗</a>
+        </div>
+        <p class="nt-meta">Your memory, chats and keys stay on your Mac. No account with me, no tracking.</p>
+      </div>
+      <div class="sb-art" role="img" aria-label="SB's screen: a gold black hole on a dark background with the words SB online">
+        <span class="clock">21:40</span><i class="ring"></i><span class="word">SB online</span>
+      </div>
+    </section>
+
+    <div class="container nt-jump" aria-label="On this page">
+      <a href="#what">What it does</a>
+      <a href="#safety">Safety</a>
+      <a href="#install">Install</a>
+      <a href="#help">Help</a>
+    </div>
+
+    <section class="nt-section" id="what">
+      <div class="container">
+        <p class="eyebrow">Just say it</p>
+        <h2>What it <em>does</em></h2>
+        <p class="sub">Talk or type in Bangla, English or Banglish. Simple jobs like volume or opening an app are decided in
+          code, so they happen instantly.</p>
+        <div class="sb-grid">
+          <div><strong>Study planner</strong><p>Give it your exam date and chapters, or attach the syllabus. It spreads the chapters over the days left and picks your top 3 tasks each morning.</p><span class="sb-say" lang="bn">১০ ডিসেম্বর Physics পরীক্ষা</span></div>
+          <div><strong>Quiz from your notes</strong><p>Attach a PDF, Word file or a photo of a page. It asks 8 questions, checks your answers, and brings back the ones you got wrong.</p><span class="sb-say" lang="bn">quiz নাও</span></div>
+          <div><strong>Focus timer</strong><p>A 25-minute session. SB stays quiet and holds other reminders until your break.</p><span class="sb-say" lang="bn">Physics পড়তে বসছি</span></div>
+          <div><strong>Classroom deadlines</strong><p>Reads Google Classroom's emails and reminds you 24 and 3 hours before each deadline.</p><span class="sb-say" lang="bn">আজকের ৩টা কাজ</span></div>
+          <div><strong>Mac control</strong><p>Volume, brightness, Wi-Fi, and opening or quitting apps.</p><span class="sb-say" lang="bn">brightness ৫০ করো</span></div>
+          <div><strong>Safari</strong><p>Opens sites, searches, reads a page and clicks for you. It also plays songs on YouTube.</p><span class="sb-say" lang="bn">Wikipedia-তে Dhaka খোঁজো</span></div>
+          <div><strong>Explain a video</strong><p>Paste a YouTube link and it explains the lecture from the video's transcript.</p><span class="sb-say" lang="bn">এই ভিডিওটা বুঝিয়ে দাও</span></div>
+          <div><strong>Notes and files</strong><p>Saves notes to Notion, creates Google Docs and Sheets, and reads PDFs and documents in your folders.</p><span class="sb-say" lang="bn">Notion-এ রাখো যে…</span></div>
+          <div><strong>Memory</strong><p>Remembers what matters about you, keeps a daily backup, and says so honestly when it is offline.</p><span class="sb-say" lang="bn">মনে রাখো</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="nt-section" id="safety">
+      <div class="container">
+        <p class="eyebrow">Built into the code</p>
+        <h2>It asks <em>first</em></h2>
+        <p class="sub">These are rules in the code, not just instructions to the AI, so a web page or an email can't talk it out of them.</p>
+        <div class="sb-grid">
+          <div><strong>Your yes, every time</strong><p>Mail, file moves, deletes and risky buttons in Safari wait for an on-screen button or a spoken “yes”.</p></div>
+          <div><strong>Pages are only data</strong><p>Text from websites, mail and files is read as information, never followed as an instruction.</p></div>
+          <div><strong>No passwords, no logins</strong><p>It never types passwords or card numbers, never logs in for you, and never reads your personal social feed.</p></div>
+          <div><strong>Read-only files</strong><p>It only looks inside Desktop, Documents and Downloads, and changes nothing unless you approve.</p></div>
+          <div><strong>Only on your Mac</strong><p>The server listens on your Mac alone. Other websites can't reach it.</p></div>
+          <div><strong>Keys stay private</strong><p>Keys live in a private folder outside the code and are never uploaded anywhere.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="nt-section" id="install">
+      <div class="container">
+        <p class="eyebrow">Mac · about 15 minutes</p>
+        <h2>Install on your <em>Mac</em></h2>
+        <p class="sub">You need a Mac and a Claude subscription. SB uses your own Claude Code login as its brain, so there's
+          no AI bill to set up. Voice needs a free ElevenLabs account.</p>
+        <ol class="modal-steps">
+          <li><div><strong>Download SB</strong><span>Click “Download ZIP” at the top of this page. Double-click the file in Downloads to unzip it. You get a folder called SB-Assistant-main.</span></div></li>
+          <li><div><strong>Install Node.js</strong><span>Download the LTS version from nodejs.org and install it. To check, open Terminal (Cmd + Space, type Terminal) and paste this. You should see a version number.</span>
+            <div class="cmd"><code>node -v</code></div></div></li>
+          <li><div><strong>Install Claude Code and sign in</strong><span>Install the Claude desktop app or Claude Code, then sign in with your Claude account once. SB talks to it on your Mac.</span></div></li>
+          <li><div><strong>Start SB</strong><span>Paste this in Terminal and keep the window open. Then open http://localhost:3000 in Safari.</span>
+            <div class="cmd"><code>cd ~/Downloads/SB-Assistant-main &amp;&amp; node server.js</code></div></div></li>
+          <li><div><strong>Add your voice key</strong><span>Open http://localhost:3000/setup.html, paste your ElevenLabs API key and pick a voice. The key is saved only on your Mac.</span></div></li>
+          <li><div><strong>Give it permission</strong><span>On SB's page, open Settings and click “সব অনুমতি চাও”. macOS asks one by one, so click Allow or OK for each.</span></div></li>
+          <li><div><strong>Optional: university mail</strong><span>To read Classroom deadlines, add your college email to SB's settings file as MAIL_FROM. It must already be set up in the Mac Mail app.</span>
+            <div class="cmd"><code>open -e ~/Library/Application\ Support/SB/.env</code></div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="nt-section" id="help">
+      <div class="container">
+        <p class="eyebrow">Stuck?</p>
+        <h2>If something <em>goes wrong</em></h2>
+        <div class="nt-help">
+          <div><strong>“Claude Code খুঁজে পাইনি”</strong><p>SB can't find Claude Code. Install it and sign in, then start SB again.</p></div>
+          <div><strong>The mic doesn't work</strong><p>System Settings → Privacy &amp; Security → Microphone, then turn on Safari. You also need the ElevenLabs key from step 5.</p></div>
+          <div><strong>Safari or Mail jobs fail</strong><p>Click “সব অনুমতি চাও” in Settings again. Then check System Settings → Privacy &amp; Security → Automation.</p></div>
+          <div><strong>Still stuck?</strong><p>Message me on <a href="https://wa.me/917022232721" target="_blank" rel="noopener"><strong style="display:inline">WhatsApp</strong></a> or open an issue on <a href="https://github.com/sandip617/SB-Assistant/issues" target="_blank" rel="noopener"><strong style="display:inline">GitHub</strong></a>.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="container nt-foot">
+      <p>© <span id="year">2026</span> Sandip Pal · SB Assistant is free and open source</p>
+      <a href="../../#series">← Back to Project</a>
+    </footer>
+  </main>
+
+  <script>
+    // Copy buttons for the Terminal commands
+    document.querySelectorAll(".cmd").forEach(box => {
+      const btn = document.createElement("button");
+      btn.type = "button"; btn.className = "copy-btn"; btn.textContent = "Copy";
+      btn.addEventListener("click", async () => {
+        try { await navigator.clipboard.writeText(box.querySelector("code").textContent); btn.textContent = "Copied ✓"; }
+        catch { btn.textContent = "Select & copy"; }
+        setTimeout(() => { btn.textContent = "Copy"; }, 1800);
+      });
+      box.append(btn);
+    });
+    document.getElementById("year").textContent = new Date().getFullYear();
+    // Header border once the page is scrolled
+    const header = document.querySelector(".site-header");
+    addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 8), { passive: true });
+  </script>
+  <script src="../../guides/drawer.js"></script>
+</body>
+
+</html>

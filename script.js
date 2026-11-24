@@ -235,6 +235,15 @@ const playbooks = {
         page: "projects/news-board/",
         cta: "See how it works →",
         thumb: "news"
+      },
+      {
+        type: "Mac App · Voice Assistant · Bangla",
+        title: "SB Assistant",
+        desc: "A personal Bangla voice assistant that runs on your own Mac. It plans exam study, quizzes you from your notes, reads Classroom deadlines, controls volume, Wi-Fi and apps, and works in Safari. Anything that sends, posts or deletes waits for your yes.",
+        code: "https://github.com/sandip617/SB-Assistant",
+        page: "projects/sb-assistant/",
+        cta: "See how it works →",
+        thumb: "sb"
       }
     ],
     help: { text: "Installing a Safari extension?", link: "Step-by-step setup guide →", href: "guides/safari-extensions/" },
@@ -264,7 +273,8 @@ const workThumbs = {
   ytvibe: '<img class="yv-logo" src="projects/yt-premium-vibe/logo.png" alt="" width="56" height="56">' +
     '<span class="yv-pills" aria-hidden="true"><i>✦ AI Summary</i><i>↓ Download</i></span>',
   news: '<span class="nb-date">TUESDAY · 3 NOVEMBER</span><span class="nb-mast">News Board</span>' +
-    '<span class="nb-cols" aria-hidden="true"><i></i><i></i><i></i></span>'
+    '<span class="nb-cols" aria-hidden="true"><i></i><i></i><i></i></span>',
+  sb: '<i class="sb-hole" aria-hidden="true"></i><span class="sb-word">SB online</span>'
 };
 
 /* Builds the "Live project" cards shown inside a playbook */
