@@ -244,6 +244,14 @@ const playbooks = {
         page: "projects/sb-assistant/",
         cta: "See how it works →",
         thumb: "sb"
+      },
+      {
+        type: "Web Game · 4–8 Players · Bangla",
+        title: "Jhogra Card (ঝগড়া কার্ড)",
+        desc: "A Bengali family party card game where everyone plays on their own phone. The judge reads a funny family situation, the others secretly play their silliest excuse and act it out in a random mood, and the judge picks the funniest. Action cards, appeals and sudden death. Sign in with Google and play free.",
+        url: "https://jhogra.itzsandippal.com",
+        cta: "Play now ↗",
+        thumb: "jhogra"
       }
     ],
     help: { text: "Installing a Safari extension?", link: "Step-by-step setup guide →", href: "guides/safari-extensions/" },
@@ -274,7 +282,8 @@ const workThumbs = {
     '<span class="yv-pills" aria-hidden="true"><i>✦ AI Summary</i><i>↓ Download</i></span>',
   news: '<span class="nb-date">TUESDAY · 3 NOVEMBER</span><span class="nb-mast">News Board</span>' +
     '<span class="nb-cols" aria-hidden="true"><i></i><i></i><i></i></span>',
-  sb: '<i class="sb-hole" aria-hidden="true"></i><span class="sb-word">SB online</span>'
+  sb: '<i class="sb-hole" aria-hidden="true"></i><span class="sb-word">SB online</span>',
+  jhogra: '<img class="jc-logo" src="projects/jhogra-card/logo.png" alt="" width="64" height="64"><span class="jc-word">ঝগড়া কার্ড</span>'
 };
 
 /* Builds the "Live project" cards shown inside a playbook */
