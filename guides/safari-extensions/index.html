@@ -7,14 +7,14 @@
   <title>Turn on a Safari extension — Step-by-step guide · Sandip Pal</title>
   <meta name="description" content="How to turn on a Safari extension on Mac, step by step: developer settings, unsigned extensions, the Extensions list and website access. For NN Tab and YT Premium Vibe.">
   <meta name="author" content="Sandip Pal">
-  <meta name="theme-color" content="#f5f2ec">
+  <meta name="theme-color" content="#eef0f4">
   <link rel="canonical" href="https://itzsandippal.com/guides/safari-extensions/">
   <link rel="icon" type="image/svg+xml" href="../../logo.svg">
   <link rel="icon" type="image/png" href="../../logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css?v=20261128c">
   <style>
     [hidden] { display: none !important; }
     .nt-back { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: .9rem; white-space: nowrap; }
@@ -35,23 +35,23 @@
     /* Progress */
     .g-progress { position: sticky; top: 64px; z-index: 5; display: flex; align-items: center; gap: 14px; padding: 12px 0; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
     .g-bar { flex: 1; height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
-    .g-bar i { display: block; height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, #ec4899, #8b5cf6); transition: width .4s cubic-bezier(.2, .8, .2, 1); }
+    .g-bar i { display: block; height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, var(--blue), var(--orange)); transition: width .4s cubic-bezier(.2, .8, .2, 1); }
     .g-count { font-weight: 800; font-size: .9rem; min-width: 92px; text-align: right; }
 
     /* Step cards */
     .g-steps { display: grid; gap: 18px; padding: 26px 0 10px; }
     .g-step { display: grid; gap: 20px; padding: 22px; border-radius: var(--radius, 22px); background: var(--card); border: 1px solid var(--line); scroll-margin-top: 130px; transition: opacity .3s, filter .3s, border-color .3s; }
     .g-step.done { border-color: color-mix(in srgb, #22c55e 45%, var(--line)); }
-    .g-step.skip { opacity: .45; filter: grayscale(.6); }
+    .g-step.skip { opacity: .75; filter: grayscale(.6); }
     .g-step.flash { animation: g-flash 1.6s ease; }
-    @keyframes g-flash { 0%, 100% { box-shadow: none; } 30% { box-shadow: 0 0 0 4px rgba(236, 72, 153, .35); } }
+    @keyframes g-flash { 0%, 100% { box-shadow: none; } 30% { box-shadow: 0 0 0 4px rgba(255, 91, 46, .35); } }
     .g-head { display: flex; gap: 14px; align-items: flex-start; }
     .g-num { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: var(--paper); font-weight: 800; }
     .g-step.done .g-num { background: #22c55e; }
     .g-head h2 { font-size: 1.35rem; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 6px; }
     .g-head p { color: var(--muted); font-size: .97rem; }
     .g-head p b { color: var(--ink); }
-    .g-tag { display: inline-block; margin-left: 6px; padding: 2px 9px; border-radius: 99px; font-size: .72rem; font-weight: 800; vertical-align: middle; background: rgba(236, 72, 153, .12); color: #be185d; }
+    .g-tag { display: inline-block; margin-left: 6px; padding: 2px 9px; border-radius: 99px; font-size: .72rem; font-weight: 800; vertical-align: middle; background: rgba(255, 91, 46, .14); color: #9a2a0c; }
     .g-tag.opt { background: var(--line); color: var(--muted); }
     .g-check { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--paper); font-weight: 700; font-size: .88rem; cursor: pointer; user-select: none; }
     .g-check input { width: 18px; height: 18px; accent-color: #22c55e; }
@@ -71,11 +71,11 @@
     .mock-body { padding: 18px 20px 22px; display: grid; gap: 10px; }
     .mock-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; color: #444; }
     .mock-row .box { flex: none; width: 15px; height: 15px; border-radius: 4px; border: 1.5px solid #9a978f; background: #fff; }
-    .mock-row.dim { opacity: .5; }
+    .mock-row.dim { color: #6e6e73; }
     .mock-row.hot { position: relative; color: #111; font-weight: 600; background: #fff; }
     .mock-row.hot .box { border-color: #2f6fed; background: #2f6fed; box-shadow: inset 0 0 0 2px #fff; }
-    .hot::after { content: ""; position: absolute; inset: -5px; border-radius: 12px; border: 2.5px solid #ec4899; animation: g-ring 1.6s ease-in-out infinite; pointer-events: none; }
-    @keyframes g-ring { 0%, 100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, .45); } 50% { box-shadow: 0 0 0 7px rgba(236, 72, 153, 0); } }
+    .hot::after { content: ""; position: absolute; inset: -5px; border-radius: 12px; border: 2.5px solid var(--orange); animation: g-ring 1.6s ease-in-out infinite; pointer-events: none; }
+    @keyframes g-ring { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 91, 46, .45); } 50% { box-shadow: 0 0 0 7px rgba(255, 91, 46, 0); } }
     .mock-split { display: grid; grid-template-columns: 170px 1fr; min-height: 150px; }
     .mock-list { border-right: 1px solid #e3e1dd; padding: 10px; display: grid; align-content: start; gap: 4px; background: #f6f5f2; }
     .mock-list .mock-row { padding: 6px 8px; }
@@ -88,7 +88,7 @@
     .mock-menubar span:first-child { font-size: 15px; line-height: 1; }
     .mock-drop { margin: 0 0 18px 34px; width: 230px; border-radius: 10px; background: #fff; border: 1px solid #e0ded9; box-shadow: 0 14px 30px -14px rgba(0, 0, 0, .3); padding: 6px; }
     .mock-drop .mock-row { justify-content: space-between; padding: 6px 10px; }
-    .mock-drop .mock-row kbd { font: 12px -apple-system, sans-serif; color: #888; }
+    .mock-drop .mock-row kbd { font: 12px -apple-system, sans-serif; color: #6e6e73; }
     .mock-drop hr { border: 0; border-top: 1px solid #eee; margin: 4px 0; }
     .mock-toolbar { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: #f3f2ef; }
     .mock-url { flex: 1; padding: 7px 12px; border-radius: 8px; background: #e6e4e0; color: #555; text-align: center; font-size: 12px; }
@@ -110,7 +110,7 @@
     .g-stay > p { color: var(--muted); max-width: 680px; }
     .g-stay ol { list-style: none; counter-reset: st; display: grid; gap: 12px; margin: 22px 0 0; padding: 0; max-width: 780px; }
     .g-stay li { counter-increment: st; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding: 14px; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); }
-    .g-stay li::before { content: counter(st); display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #fff; font-weight: 800; font-size: .9rem; }
+    .g-stay li::before { content: counter(st); display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--blue); color: #fff; font-weight: 800; font-size: .9rem; }
     .g-stay li strong { display: block; margin-bottom: 2px; }
     .g-stay li span { color: var(--muted); font-size: .95rem; }
     .g-stay li span b { color: var(--ink); }
@@ -157,8 +157,8 @@
 
   <main>
     <section class="container g-hero">
-      <p class="eyebrow">Guide · Safari on Mac · 2 minutes</p>
       <h1>Turn on a <em>Safari extension</em></h1>
+      <p class="eyebrow">Guide · Safari on Mac · 2 minutes</p>
       <p class="lead">Safari keeps extensions you install yourself switched off until you allow them. Follow these steps once. Tick each step as you go.</p>
       <div class="g-pick" role="group" aria-label="Which extension are you installing?">
         <span>Installing:</span>

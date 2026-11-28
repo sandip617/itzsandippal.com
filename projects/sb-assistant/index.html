@@ -16,7 +16,7 @@
   <meta name="description"
     content="SB Assistant is a personal Bangla voice assistant for macOS by Sandip Pal. Study planning, quizzes, Mac and Safari control, with safety checks built into the code. Free and open source.">
   <meta name="author" content="Sandip Pal">
-  <meta name="theme-color" content="#f5f2ec">
+  <meta name="theme-color" content="#eef0f4">
   <link rel="canonical" href="https://itzsandippal.com/projects/sb-assistant/">
 
   <meta property="og:type" content="website">
@@ -31,9 +31,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Manrope:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../style.css?v=20261128c">
   <style>
     .nt-back { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: .9rem; white-space: nowrap; transition: background .25s, color .25s; }
     .nt-back:hover { background: var(--ink); color: var(--paper); }
@@ -47,8 +47,8 @@
 
     /* The app's gold black hole, drawn in CSS so no screenshot of anyone's data is needed */
     .sb-art { position: relative; aspect-ratio: 16 / 10; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 60px -30px rgba(17, 16, 20, .45);
-      background: radial-gradient(ellipse 62% 9% at 50% 47%, rgba(255, 210, 120, .7), transparent 70%), radial-gradient(circle at 50% 47%, rgba(246, 180, 70, .22), transparent 50%), #05040a; display: grid; place-items: center; }
-    .sb-art .ring { width: 34%; aspect-ratio: 1; border-radius: 50%; background: #000; box-shadow: 0 0 0 4px #f3c25a, 0 0 46px 14px rgba(243, 194, 90, .5), inset 0 0 26px #000; position: relative; }
+      background: #05040a; display: grid; place-items: center; }
+    .sb-art .ring { width: 34%; aspect-ratio: 1; border-radius: 50%; background: #000; box-shadow: 0 0 0 4px #f3c25a, inset 0 0 26px #000; position: relative; }
     .sb-art .ring::after { content: ""; position: absolute; inset: -14%; border-radius: 50%; background: conic-gradient(from 0deg, transparent, rgba(255, 214, 130, .55), transparent 35%, transparent 60%, rgba(255, 214, 130, .35), transparent); filter: blur(6px); animation: sbspin 14s linear infinite; }
     .sb-art .word { position: absolute; bottom: 9%; font: 800 .8rem/1 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: #f3c25a; }
     .sb-art .clock { position: absolute; top: 8%; left: 6%; font: 300 1.6rem/1 var(--sans); color: rgba(255, 236, 200, .85); letter-spacing: .02em; }
@@ -115,8 +115,8 @@
   <main>
     <section class="container nt-hero">
       <div>
-        <p class="eyebrow">Mac app · Bangla voice assistant</p>
         <h1>SB <em>Assistant</em></h1>
+        <p class="eyebrow">Mac app · Bangla voice assistant</p>
         <p class="lead">A personal voice assistant that speaks Bangla and runs only on your own Mac. It plans your exam
           study, quizzes you from your notes, reminds you of Classroom deadlines, controls the Mac and works in
           Safari. Anything that sends, posts or deletes waits for your “yes”. Free and open source.</p>

@@ -89,12 +89,33 @@ const observer = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.12 });
-document.querySelectorAll(".reveal").forEach((el, i) => {
-  // small stagger for items that sit in the same grid
-  const siblings = el.parentElement.querySelectorAll(":scope > .reveal");
-  if (siblings.length > 1) el.style.transitionDelay = `${[...siblings].indexOf(el) * 70}ms`;
-  observer.observe(el);
-});
+function startReveal() {
+  document.querySelectorAll(".reveal").forEach(el => {
+    // small stagger for items that sit in the same grid
+    const siblings = el.parentElement.querySelectorAll(":scope > .reveal");
+    if (siblings.length > 1) el.style.transitionDelay = `${[...siblings].indexOf(el) * 70}ms`;
+    observer.observe(el);
+  });
+}
+
+/* ---------- cinematic intro: hero reveals only once the curtain lifts ---------- */
+const intro = document.getElementById("intro");
+if (document.documentElement.classList.contains("no-intro")) {
+  intro.remove();
+  startReveal();
+} else {
+  let done = false;
+  const endIntro = () => {
+    if (done) return;
+    done = true;
+    try { sessionStorage.setItem("introSeen", "1"); } catch (e) {}
+    intro.classList.add("lift");
+    startReveal();
+    setTimeout(() => intro.remove(), 900);
+  };
+  intro.addEventListener("click", endIntro);
+  setTimeout(endIntro, 2200);
+}
 
 /* ---------- rotating hero word ---------- */
 const words = ["noticed", "trusted", "chosen", "talked about", "remembered"];

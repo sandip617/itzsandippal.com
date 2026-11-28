@@ -20,7 +20,7 @@
     content="Sandip Pal, Sandip Pal Portfolio, Sandip Pal Digital Marketing, Sandip Pal Content Creator, Sandip Pal Jain University, BBA Jain University Bangalore, Sandip Pal Videographer, Sandip Pal Photographer">
   <meta name="author" content="Sandip Pal">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#f5f2ec">
+  <meta name="theme-color" content="#eef0f4">
 
   <!-- Open Graph / Social Media SEO -->
   <meta property="og:type" content="website">
@@ -66,12 +66,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Manrope:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261125a">
+  <link rel="stylesheet" href="style.css?v=20261128c">
+  <!-- skip the opening intro on repeat visits in the same tab session, or for reduced motion -->
+  <script>
+    try {
+      if (sessionStorage.getItem("introSeen") || matchMedia("(prefers-reduced-motion: reduce)").matches)
+        document.documentElement.classList.add("no-intro");
+    } catch (e) { document.documentElement.classList.add("no-intro"); }
+  </script>
 </head>
 
 <body>
+  <!-- ===== Cinematic opening: plays once per session, click to skip ===== -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-bar intro-bar-top"></div>
+    <div class="intro-inner">
+      <p class="intro-rec"><span class="live-dot"></span> REC</p>
+      <p class="intro-name"><span>Sandip</span> <em>Pal</em></p>
+      <p class="intro-tag">Marketing mind · Creative hands</p>
+    </div>
+    <div class="intro-bar intro-bar-bottom"></div>
+  </div>
+
   <div class="scroll-progress" id="scrollProgress"></div>
 
   <!-- ===== FUNNEL METER: the site is a live AIDA funnel ===== -->
@@ -183,7 +201,7 @@
     <section class="section" id="about" data-stage="interest">
       <div class="container about-grid">
         <div class="about-copy">
-          <p class="eyebrow reveal">01 — About</p>
+          <p class="eyebrow reveal">About</p>
           <h2 class="reveal">Business brain.<br><em>Creative hands.</em></h2>
           <p class="reveal">
             I’m a BBA student at <strong>Jain University, Bangalore</strong>. In class I learn how markets,
@@ -228,7 +246,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">02 — The marketing mix</p>
+            <p class="eyebrow">The marketing mix</p>
             <h2>The <em>4Ps</em> of me.</h2>
           </div>
           <p>Every BBA student learns the 4Ps. Here they are, applied to myself. Tap a card to flip it.</p>
@@ -276,7 +294,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">03 — Services</p>
+            <p class="eyebrow">Services</p>
             <h2>How I can <em>help</em>.</h2>
           </div>
           <p>Six services, one goal: content that looks good and gets results.</p>
@@ -374,7 +392,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <p class="eyebrow">04 — The playbook</p>
+            <p class="eyebrow">The playbook</p>
             <h2>How a project <em>runs</em>.</h2>
           </div>
           <p>Four kinds of projects I take on. Open one to see the step-by-step.</p>
@@ -439,7 +457,7 @@
     <section class="section contact" id="contact" data-stage="action">
       <div class="container contact-grid">
         <div class="contact-side reveal">
-          <p class="eyebrow">05 — Let’s talk</p>
+          <p class="eyebrow">Let’s talk</p>
           <h2>Write a brief.<br><em>I’ll do the rest.</em></h2>
           <p>Fill in the blanks. It opens your email app with everything ready to send.</p>
           <div class="contact-links">
@@ -519,7 +537,7 @@
         <div class="fn-copy">
           <p class="eyebrow">Newsletter</p>
           <h3>Not ready for a brief? <em>Get the newsletter.</em></h3>
-          <p>New projects, marketing notes and behind-the-scenes. No spam, unsubscribe in one click.</p>
+          <p>New projects, marketing notes and behind-the-scenes from my work. Every email has an unsubscribe link.</p>
         </div>
         <div class="fn-side">
           <form class="fn-form" id="footerNlForm"
@@ -575,8 +593,7 @@
       <div class="nl-body">
         <p class="eyebrow">Halfway down the funnel</p>
         <h2 id="nlTitle">This is the part where I ask for your <em>email</em>.</h2>
-        <p class="nl-text" id="nlText">New projects, marketing notes and behind-the-scenes from my work. No spam, and you can
-          unsubscribe in one click.</p>
+        <p class="nl-text" id="nlText">New projects, marketing notes and behind-the-scenes from my work. Every email has an unsubscribe link.</p>
         <!-- Posts to the MailerLite form "Website popup (50% scroll)" → group "Website newsletter" -->
         <form class="nl-form" id="nlForm"
           action="https://assets.mailerlite.com/jsonp/2780838/forms/203667046511150673/subscribe" method="post" novalidate>
@@ -588,7 +605,7 @@
           <input type="hidden" name="anticsrf" value="true">
           <button class="btn btn-primary" type="submit">Subscribe <span aria-hidden="true">→</span></button>
         </form>
-        <p class="nl-note" id="nlNote" role="status" aria-live="polite">You’ll get one email to confirm. That’s it.</p>
+        <p class="nl-note" id="nlNote" role="status" aria-live="polite">You’ll get one email to confirm your address.</p>
         <button class="nl-skip" type="button" data-nl-close>No thanks, I’ll keep scrolling</button>
       </div>
 
@@ -601,7 +618,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=20261125a"></script>
+  <script src="script.js?v=20261128a"></script>
 </body>
 
 </html>
